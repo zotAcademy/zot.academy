@@ -1,0 +1,118 @@
+<template>
+  <div class="app-header">
+    <nav class="navbar navbar-toggleable-md navbar-light bg-faded navbar-fixed-top">
+      <button class="navbar-toggler navbar-toggler-right" type="button" aria-controls="navbarSupportedContent" :aria-expanded="navbar.expanded" aria-label="Toggle navigation" @click="navbar.expanded = !navbar.expanded">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="#" @click.prevent>Zot Academy</a>
+
+      <collapse-transition>
+        <div class="collapse navbar-collapse show" id="navbarSupportedContent" v-show="navbar.expanded">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <router-link class="nav-link" to="/" active-class="active" exact>Home</router-link>
+            </li>
+          </ul>
+          <ul class="navbar-nav d-inline-flex">
+            <li class="nav-item mt-2 mt-lg-0 mr-3">
+              <form class="navbar-nav form-inline">
+                <input class="form-control" type="text" placeholder="Search">
+              </form>
+            </li>
+            <transition name="slide-fade" mode="out-in">
+              <li class="nav-item dropdown mt-2 mt-lg-0" :class="{show: dropdown.expanded}" v-if="isAuthenticated" key="isAuthenticated">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" aria-haspopup="true" :aria-expanded="dropdown.expanded" @click.prevent="dropdown.expanded = !dropdown.expanded" v-on-clickaway="closeDropdown">
+                  @{{ username }}
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                  <router-link class="dropdown-item" :to="'/' + username">View profile</router-link>
+                  <div class="dropdown-divider"></div>
+                  <router-link class="dropdown-item" to="/settings">Settings</router-link>
+                  <router-link class="dropdown-item" to="/logout" @click="dropdown.expanded = false">Log out</router-link>
+                </div>
+              </li>
+              <li class="nav-item mt-2 mt-lg-0" v-else key="isUnauthenticated">
+                <router-link class="btn btn-outline-primary mr-2" to="/login">Log in</router-link>
+                <router-link class="btn btn-outline-primary" to="/signup">Sign up</router-link>
+              </li>
+            </transition>
+          </ul>
+        </div>
+      </collapse-transition>
+    </nav>
+    <div class="progress" v-if="loading">
+      <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"></div>
+    </div>
+  </div>
+</template>
+
+<script>
+import CollapseTransition from '../transitions/Collapse'
+import { mixin as clickaway } from 'vue-clickaway'
+
+export default {
+  name: 'app-header',
+  mixins: [ clickaway ],
+  components: {
+    CollapseTransition
+  },
+  data () {
+    return {
+      navbar: {
+        expanded: false
+      },
+      dropdown: {
+        expanded: false
+      }
+    }
+  },
+  watch: {
+    '$route' () {
+      this.navbar.expanded = this.dropdown.expanded = false
+    }
+  },
+  computed: {
+    username () {
+      return this.$store.state.session.isAuthenticated ? this.$store.state.session.user.username : null
+    },
+    loading () {
+      return this.$store.state.requests.count > 0
+    },
+    isAuthenticated () {
+      return this.$store.state.session.isAuthenticated
+    }
+  },
+  methods: {
+    closeDropdown () {
+      this.dropdown.expanded = false
+    }
+  }
+}
+</script>
+
+<!-- Add "scoped" atribute to limit CSS to this component only -->
+<style scoped>
+.progress {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 4px;
+  border-radius: 0;
+}
+.progress-bar {
+  width: 100%;
+}
+
+.slide-fade-enter-active {
+  transition: all .35s ease;
+}
+.slide-fade-leave-active {
+  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-to {
+  opacity: 0;
+}
+.slide-fade-enter, .slide-fade-leave-to {
+  transform: translateX(10px);
+}
+</style>
