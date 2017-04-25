@@ -61,7 +61,7 @@ export default {
   data () {
     return {
       comment: comment.toSVG({
-        height: 24
+        height: 28
       }),
       navbar: {
         expanded: false
