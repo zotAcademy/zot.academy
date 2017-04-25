@@ -1,0 +1,14 @@
+machine:
+  node:
+    version: 6.1.0
+test:
+  override:
+    - npm run build
+deployment:
+  production:
+    branch: master
+    commands:
+      - rm -rf dist
+      - git clone https://github.com/zotAcademy/zotacademy.github.io dist
+      - npm run build
+      - cd dist && git add --all . && git commit -m "Automated deployment" && git push
