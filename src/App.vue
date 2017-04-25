@@ -14,13 +14,15 @@
 import AppLayout from '@/components/AppLayout'
 import AppHeader from '@/components/AppHeader'
 import AppFooter from '@/components/AppFooter'
+import AppQuestionSummary from '@/components/AppQuestionSummary'
 
 export default {
   name: 'app',
   components: {
     AppLayout,
     AppHeader,
-    AppFooter
+    AppFooter,
+    AppQuestionSummary
   }
 }
 </script>

@@ -6,6 +6,7 @@ import Login from '@/views/Login'
 import Logout from '@/views/Logout'
 import NotFound from '@/views/NotFound'
 import CreateGroup from '@/views/CreateGroup'
+import contentPage from '@/views/contentPage'
 
 Vue.use(Router)
 
@@ -20,6 +21,9 @@ export default new Router({
   }, {
     path: '/login',
     component: Login
+  }, {
+    path: '/content',
+    component: contentPage
   }, {
     path: '/logout',
     component: Logout
