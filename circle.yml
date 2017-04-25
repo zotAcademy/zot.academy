@@ -14,4 +14,6 @@ deployment:
       - rm -rf dist
       - git clone https://github.com/zotAcademy/zotacademy.github.io dist
       - npm run build
-      - cd dist && ( git diff --exit-code || ( cp index.html 404.html && git add --all . && git commit -m "Automated deployment" && git push ) )
+      - cd dist && cp index.html 404.html
+      - cd dist && git add --all .
+      - cd dist && git diff --quiet --exit-code HEAD || ( git commit -m "Continuous Deployment $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME@$CIRCLE_SHA1" && git push )
