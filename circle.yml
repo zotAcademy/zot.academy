@@ -8,8 +8,8 @@ deployment:
   production:
     branch: master
     commands:
-      - git config -g user.name "CircleCI"
-      - git config -g user.email "circleci@zot.academy"
+      - git config --global user.name "CircleCI"
+      - git config --global user.email "circleci@zot.academy"
       - rm -rf dist
       - git clone https://github.com/zotAcademy/zotacademy.github.io dist
       - npm run build
