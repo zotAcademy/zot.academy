@@ -11,4 +11,4 @@ deployment:
       - rm -rf dist
       - git clone https://github.com/zotAcademy/zotacademy.github.io dist
       - npm run build
-      - cd dist && git add --all . && git commit -m "Automated deployment" && git push
+      - cd dist && git config user.name "CircleCI" && git config user.email "circleci@zot.academy" && git add --all . && git commit -m "Automated deployment" && git push
