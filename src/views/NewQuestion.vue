@@ -8,12 +8,12 @@
     </div>
     <div class="card mb-3">
       <div class="card-block">
-        <h4 class="card-title">Create New Group</h4>
-          <form @submit.prevent="createGroup">
+        <h4 class="card-title">Post New Question</h4>
+          <form @submit.prevent="post">
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Group name" v-model="group.name">
+              <input type="text" class="form-control" placeholder="What are you wondering?" v-model="question.text">
             </div>
-            <button class="btn btn-block btn-primary">Create Group</button>
+            <button class="btn btn-block btn-primary">Post</button>
           </form>
       </div>
     </div>
@@ -24,21 +24,21 @@
 import api from '@/api'
 
 export default {
-  name: 'app-create-group',
+  name: 'app-new-question',
   data () {
     return {
-      group: {
-        name: ''
+      question: {
+        text: ''
       },
       error: null
     }
   },
   methods: {
-    createGroup () {
+    post () {
       var self = this
-      api.post('/groups/', this.group)
-        .then(function () {
-          self.$router.push('/groups/' + self.group.name)
+      api.post('/questions/', this.question)
+        .then(function (data) {
+          self.$router.push('/questions/' + data.id)
         })
         .catch(function (error) {
           self.error = error.response.data
