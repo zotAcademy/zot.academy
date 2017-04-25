@@ -14,4 +14,4 @@ deployment:
       - rm -rf dist
       - git clone https://github.com/zotAcademy/zotacademy.github.io dist
       - npm run build
-      - cd dist && git diff --exit-code || ( git add --all . && git commit -m "Automated deployment" && git push )
+      - cd dist && ( git diff --exit-code || ( git add --all . && git commit -m "Automated deployment" && git push ) )
