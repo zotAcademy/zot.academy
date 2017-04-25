@@ -8,6 +8,7 @@ deployment:
   production:
     branch: master
     commands:
+      - sed -i -e 's,http://localhost:3000,http://api.zot.academy,' src/api.js
       - git config --global user.name "CircleCI"
       - git config --global user.email "circleci@zot.academy"
       - rm -rf dist
