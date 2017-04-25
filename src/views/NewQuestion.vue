@@ -8,12 +8,12 @@
     </div>
     <div class="card mb-3">
       <div class="card-block">
-        <h4 class="card-title">Post New Question</h4>
+        <h4 class="card-title">Ask New Question</h4>
           <form @submit.prevent="post">
             <div class="form-group">
               <input type="text" class="form-control" placeholder="What are you wondering?" v-model="question.text">
             </div>
-            <button class="btn btn-block btn-primary">Post</button>
+            <button class="btn btn-block btn-primary">Ask</button>
           </form>
       </div>
     </div>
