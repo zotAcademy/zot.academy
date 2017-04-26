@@ -14,7 +14,7 @@
     <div class="card mb-3">
       <div class="card-block">
         <h4 class="card-title">Sign up</h4>
-        <form @submit.prevent="login">
+        <form @submit.prevent="signup">
           <div class="form-group">
             <input type="text" class="form-control" placeholder="username" v-model="credential.username">
           </div>
@@ -45,7 +45,7 @@ export default {
     }
   },
   methods: {
-    login () {
+    signup () {
       var self = this
       this.$store.dispatch('session/signup', this.credential)
         .then(function () {
