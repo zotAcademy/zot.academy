@@ -19,10 +19,12 @@ store.dispatch('session/restore').then(() => {
 router.beforeEach((to, from, next) => {
   if (!store.state.session.user) {
     if (to.matched.some(record => record.meta.auth)) {
-      store.dispatch('redirection/stash', to)
       return next({
         path: '/login'
       })
+    }
+    if ((to.name === 'login' && from.name !== 'signup') || (to.name === 'signup' && from.name !== 'login')) {
+      store.dispatch('redirection/stash', from)
     }
   } else {
     if (to.name === 'login' || to.name === 'signup') {
