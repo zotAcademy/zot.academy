@@ -14,7 +14,9 @@
 import AppLayout from '@/components/AppLayout'
 import AppHeader from '@/components/AppHeader'
 import AppFooter from '@/components/AppFooter'
+
 import SlideFadeTransition from '@/transitions/SlideFade'
+
 
 export default {
   name: 'app',

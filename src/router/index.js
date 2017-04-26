@@ -5,7 +5,6 @@ import Signup from '@/views/Signup'
 import Login from '@/views/Login'
 import Logout from '@/views/Logout'
 import NotFound from '@/views/NotFound'
-import NewQuestion from '@/views/NewQuestion'
 
 Vue.use(Router)
 
@@ -22,6 +21,9 @@ export default new Router({
     path: '/login',
     name: 'login',
     component: Login
+  }, {
+    path: '/content',
+    component: contentPage
   }, {
     path: '/logout',
     component: Logout
