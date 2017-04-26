@@ -48,8 +48,12 @@ export default {
       return new Promise((resolve, reject) => {
         api.post('/users/', data)
           .then(response => {
-            commit('establishment', response.data)
-            resolve(response)
+            api.post('/session', data)
+              .then(response => {
+                commit('establishment', response.data)
+                resolve(response)
+              })
+              .catch(reject)
           })
           .catch(reject)
       })
