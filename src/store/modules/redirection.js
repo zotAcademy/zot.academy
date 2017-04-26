@@ -16,7 +16,7 @@ export default {
       commit('stash', to)
     },
     pop ({ commit, state }) {
-      return new Promise(function (resolve, reject) {
+      return new Promise((resolve, reject) => {
         var to = state.to
         if (to != null) {
           commit('pop')

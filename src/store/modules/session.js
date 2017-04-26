@@ -15,9 +15,9 @@ export default {
   },
   actions: {
     restore ({ commit }) {
-      return new Promise(function (resolve, reject) {
+      return new Promise((resolve, reject) => {
         api.get('/session')
-          .then(function (response) {
+          .then(response => {
             commit('establishment', response.data)
             resolve(response)
           })
@@ -25,9 +25,9 @@ export default {
       })
     },
     login ({ commit }, data) {
-      return new Promise(function (resolve, reject) {
+      return new Promise((resolve, reject) => {
         api.post('/session', data)
-          .then(function (response) {
+          .then(response => {
             commit('establishment', response.data)
             resolve(response)
           })
@@ -35,9 +35,9 @@ export default {
       })
     },
     logout ({ commit }) {
-      return new Promise(function (resolve, reject) {
+      return new Promise((resolve, reject) => {
         api.delete('/session')
-          .then(function (response) {
+          .then(response => {
             commit('destruction')
             resolve(response)
           })
@@ -45,9 +45,9 @@ export default {
       })
     },
     signup ({ commit }, data) {
-      return new Promise(function (resolve, reject) {
+      return new Promise((resolve, reject) => {
         api.post('/users/', data)
-          .then(function (response) {
+          .then(response => {
             commit('establishment', response.data)
             resolve(response)
           })

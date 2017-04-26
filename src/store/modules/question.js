@@ -11,9 +11,9 @@ export default {
   },
   actions: {
     get ({ commit }, id) {
-      return new Promise(function (resolve, reject) {
+      return new Promise((resolve, reject) => {
         api.get('/questions/' + id)
-          .then(function (response) {
+          .then(response => {
             commit('set', response.data)
             resolve(response)
           })
@@ -21,9 +21,9 @@ export default {
       })
     },
     post ({ commit }, data) {
-      return new Promise(function (resolve, reject) {
+      return new Promise((resolve, reject) => {
         api.post('/questions/', data)
-          .then(function (response) {
+          .then(response => {
             commit('set', response.data)
             resolve(response)
           })

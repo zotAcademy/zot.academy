@@ -7,18 +7,18 @@ const api = axios.create({
   timeout: 3000
 })
 
-api.interceptors.request.use(function (config) {
+api.interceptors.request.use(config => {
   store.dispatch('requests/increment')
   return config
-}, function (error) {
+}, error => {
   store.dispatch('requests/decrement')
   return Promise.reject(error)
 })
 
-api.interceptors.response.use(function (response) {
+api.interceptors.response.use(response => {
   store.dispatch('requests/decrement')
   return response
-}, function (error) {
+}, error => {
   store.dispatch('requests/decrement')
   if (error.response == null) {
     error.response = {
