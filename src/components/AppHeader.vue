@@ -21,9 +21,10 @@
             </li>
             <transition name="slide-fade" mode="out-in">
               <li class="nav-item dropdown mt-2 mt-lg-0" :class="{show: dropdown.expanded}" v-if="isAuthenticated" key="isAuthenticated">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" aria-haspopup="true" :aria-expanded="dropdown.expanded" @click.prevent="dropdown.expanded = !dropdown.expanded" v-on-clickaway="closeDropdown">
+                <a class="nav-link dropdown-toggle d-inline mr-2" href="#" id="navbarDropdownMenuLink" aria-haspopup="true" :aria-expanded="dropdown.expanded" @click.prevent="dropdown.expanded = !dropdown.expanded" v-on-clickaway="closeDropdown">
                   @{{ username }}
                 </a>
+                <router-link class="btn btn-outline-primary py-1 px-2" to="/questions/new" v-html="comment"></router-link>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                   <router-link class="dropdown-item" :to="'/' + username">View profile</router-link>
                   <div class="dropdown-divider"></div>
@@ -47,6 +48,7 @@
 </template>
 
 <script>
+import { comment } from 'octicons'
 import CollapseTransition from '../transitions/Collapse'
 import { mixin as clickaway } from 'vue-clickaway'
 
@@ -58,6 +60,9 @@ export default {
   },
   data () {
     return {
+      comment: comment.toSVG({
+        height: 28
+      }),
       navbar: {
         expanded: false
       },
@@ -73,13 +78,13 @@ export default {
   },
   computed: {
     username () {
-      return this.$store.state.session.isAuthenticated ? this.$store.state.session.user.username : null
+      return this.$store.state.session.user != null ? this.$store.state.session.user.username : null
     },
     loading () {
       return this.$store.state.requests.count > 0
     },
     isAuthenticated () {
-      return this.$store.state.session.isAuthenticated
+      return this.$store.state.session.user != null
     }
   },
   methods: {

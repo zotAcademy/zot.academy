@@ -1,5 +1,7 @@
 # zot.academy 
 
+[![CircleCI](https://circleci.com/gh/zotAcademy/zot.academy.svg?style=svg)](https://circleci.com/gh/zotAcademy/zot.academy)
+
 ## Build Setup
 
 ``` bash

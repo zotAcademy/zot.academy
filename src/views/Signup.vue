@@ -9,11 +9,6 @@ export default {
   name: 'signup',
   components: {
     AppSignup
-  },
-  created () {
-    if (this.$store.state.session.isAuthenticated) {
-      this.$router.push('/')
-    }
   }
 }
 </script>

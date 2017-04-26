@@ -5,14 +5,9 @@
 export default {
   name: 'logout',
   beforeCreate () {
-    var self = this
     this.$store.dispatch('session/logout')
-      .then(function () {
-        self.$router.push('/')
-      })
-      .catch(function (error) {
-        console.log(error)
-      })
+      .then(() => this.$router.push('/'))
+      .catch(() => {})
   }
 }
 </script>

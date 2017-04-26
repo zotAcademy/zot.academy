@@ -5,8 +5,6 @@ import Signup from '@/views/Signup'
 import Login from '@/views/Login'
 import Logout from '@/views/Logout'
 import NotFound from '@/views/NotFound'
-import CreateGroup from '@/views/CreateGroup'
-import contentPage from '@/views/contentPage'
 
 Vue.use(Router)
 
@@ -17,9 +15,11 @@ export default new Router({
     component: Home
   }, {
     path: '/signup',
+    name: 'signup',
     component: Signup
   }, {
     path: '/login',
+    name: 'login',
     component: Login
   }, {
     path: '/content',
@@ -28,8 +28,11 @@ export default new Router({
     path: '/logout',
     component: Logout
   }, {
-    path: '/groups/create',
-    component: CreateGroup
+    path: '/questions/new',
+    component: NewQuestion,
+    meta: {
+      auth: true
+    }
   }, {
     path: '*',
     component: NotFound
