@@ -7,14 +7,16 @@
       <span class="error-message">{{ error.message }}</span>
     </div>
     <div class="card mb-3">
+      <div class="card-header text-center">
+        Ask new question
+      </div>
       <div class="card-block">
-        <h4 class="card-title">Ask New Question</h4>
-          <form @submit.prevent="post">
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="What are you wondering?" v-model="question.text">
-            </div>
-            <button class="btn btn-block btn-primary">Ask</button>
-          </form>
+        <form @submit.prevent="post">
+          <div class="form-group">
+            <textarea class="form-control" rows="3" placeholder="What are you wondering?" v-model="question.text"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary float-right">Ask</button>
+        </form>
       </div>
     </div>
   </div>
@@ -55,10 +57,13 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+textarea {
+  resize: none;
+}
 .error-message {
   white-space: pre-wrap;
 }
 .container {
-  max-width: 26.25rem;
+  max-width: 36.875rem;
 }
 </style>
