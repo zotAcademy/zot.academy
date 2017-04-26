@@ -11,10 +11,10 @@
         <h4 class="card-title">Log in</h4>
         <form @submit.prevent="login">
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="username" v-model="credential.username">
+            <input type="text" class="form-control" placeholder="username or email" max="254" v-model="credential.username">
           </div>
           <div class="form-group">
-            <input type="password" class="form-control" placeholder="password" v-model="credential.password">
+            <input type="password" class="form-control" placeholder="password" max="255" v-model="credential.password">
           </div>
           <button class="btn btn-block btn-primary">Log me in!</button>
         </form>
