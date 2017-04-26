@@ -24,7 +24,7 @@
           <div class="form-group">
             <input type="password" class="form-control" placeholder="password" max="255" v-model="credential.password">
           </div>
-          <button class="btn btn-block btn-primary">Sign me up!</button>
+          <button class="btn btn-block btn-primary" :disabled="disabled">Sign me up!</button>
         </form>
       </div>
     </div>
@@ -41,11 +41,15 @@ export default {
         email: '',
         password: ''
       },
+      disabled: false,
       error: null
     }
   },
   methods: {
     signup () {
+      if (this.disabled) return
+      this.disabled = true
+
       var self = this
       this.$store.dispatch('session/signup', this.credential)
         .then(function () {
@@ -57,6 +61,7 @@ export default {
         })
         .catch(function (error) {
           self.error = error.response.data
+          self.disabled = false
         })
     }
   }

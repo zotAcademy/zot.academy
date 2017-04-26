@@ -15,7 +15,7 @@
           <div class="form-group">
             <textarea class="form-control" rows="3" placeholder="What are you wondering?" v-model="question.text"></textarea>
           </div>
-          <button type="submit" class="btn btn-primary float-right">Ask</button>
+          <button type="submit" class="btn btn-primary float-right" :disabled="disabled">Ask</button>
         </form>
       </div>
     </div>
@@ -32,6 +32,7 @@ export default {
       question: {
         text: ''
       },
+      disabled: false,
       error: null
     }
   },
@@ -42,6 +43,9 @@ export default {
   },
   methods: {
     post () {
+      if (this.disabled) return
+      this.disabled = true
+
       var self = this
       api.post('/questions/', this.question)
         .then(function (data) {
@@ -49,6 +53,7 @@ export default {
         })
         .catch(function (error) {
           self.error = error.response.data
+          self.disabled = false
         })
     }
   }
