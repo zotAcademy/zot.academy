@@ -24,7 +24,7 @@ export default {
             commit('establishment', response.data)
             resolve(response)
           })
-          .catch(reject)
+          .catch(resolve)
       })
     },
     login ({ commit }, data) {

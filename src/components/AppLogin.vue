@@ -45,7 +45,11 @@ export default {
       var self = this
       this.$store.dispatch('session/login', this.credential)
         .then(function () {
-          self.$router.push('/')
+          self.$store.dispatch('redirection/pop').then(function (path) {
+            self.$router.push(path)
+          }).catch(function () {
+            self.$router.push('/')
+          })
         })
         .catch(function (error) {
           self.error = error.response.data

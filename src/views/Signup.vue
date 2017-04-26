@@ -10,9 +10,14 @@ export default {
   components: {
     AppSignup
   },
-  created () {
+  beforeCreate () {
+    var self = this
     if (this.$store.state.session.isAuthenticated) {
-      this.$router.push('/')
+      this.$store.dispatch('redirection/pop').then(function (path) {
+        self.$router.push(path)
+      }).catch(function () {
+        self.$router.push('/')
+      })
     }
   }
 }

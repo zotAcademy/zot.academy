@@ -33,6 +33,11 @@ export default {
       error: null
     }
   },
+  beforeCreate () {
+    if (!this.$store.state.session.isAuthenticated) {
+      this.$router.push('/login')
+    }
+  },
   methods: {
     post () {
       var self = this
