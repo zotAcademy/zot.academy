@@ -23,8 +23,6 @@
 </template>
 
 <script>
-import api from '@/api'
-
 export default {
   name: 'app-new-question',
   data () {
@@ -36,24 +34,16 @@ export default {
       error: null
     }
   },
-  beforeCreate () {
-    if (!this.$store.state.session.isAuthenticated) {
-      this.$router.push('/login')
-    }
-  },
   methods: {
     post () {
       if (this.disabled) return
       this.disabled = true
 
-      var self = this
-      api.post('/questions/', this.question)
-        .then(function (response) {
-          self.$router.push('/questions/' + response.data.id)
-        })
-        .catch(function (error) {
-          self.error = error.response.data
-          self.disabled = false
+      this.$store.dispatch('question/post', this.question)
+        .then(response => this.$router.push('/questions/' + response.data.id))
+        .catch(error => {
+          this.error = error.response.data
+          this.disabled = false
         })
     }
   }

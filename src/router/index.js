@@ -16,16 +16,21 @@ export default new Router({
     component: Home
   }, {
     path: '/signup',
+    name: 'signup',
     component: Signup
   }, {
     path: '/login',
+    name: 'login',
     component: Login
   }, {
     path: '/logout',
     component: Logout
   }, {
     path: '/questions/new',
-    component: NewQuestion
+    component: NewQuestion,
+    meta: {
+      auth: true
+    }
   }, {
     path: '*',
     component: NotFound

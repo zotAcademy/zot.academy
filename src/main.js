@@ -6,7 +6,7 @@ import { sync } from 'vuex-router-sync'
 
 sync(store, router)
 
-store.dispatch('session/restore').then(function () {
+store.dispatch('session/restore').then(() => {
   /* eslint-disable no-new */
   new Vue({
     el: '#app',
@@ -16,9 +16,18 @@ store.dispatch('session/restore').then(function () {
   })
 })
 
-router.beforeEach(function (to, from, next) {
-  if ((to.path === '/login' || to.path === '/signup') && from.path !== '/login' && from.path !== '/signup') {
-    store.dispatch('redirection/stash', from)
+router.beforeEach((to, from, next) => {
+  if (!store.state.session.user) {
+    if (to.matched.some(record => record.meta.auth)) {
+      store.dispatch('redirection/stash', to)
+      return next({
+        path: '/login'
+      })
+    }
+  } else {
+    if (to.name === 'login' || to.name === 'signup') {
+      return next(false)
+    }
   }
   next()
 })

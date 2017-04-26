@@ -78,13 +78,13 @@ export default {
   },
   computed: {
     username () {
-      return this.$store.state.session.isAuthenticated ? this.$store.state.session.user.username : null
+      return this.$store.state.session.user != null ? this.$store.state.session.user.username : null
     },
     loading () {
       return this.$store.state.requests.count > 0
     },
     isAuthenticated () {
-      return this.$store.state.session.isAuthenticated
+      return this.$store.state.session.user != null
     }
   },
   methods: {

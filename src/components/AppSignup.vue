@@ -50,18 +50,15 @@ export default {
       if (this.disabled) return
       this.disabled = true
 
-      var self = this
       this.$store.dispatch('session/signup', this.credential)
-        .then(function () {
-          self.$store.dispatch('redirection/pop').then(function (path) {
-            self.$router.push(path)
-          }).catch(function () {
-            self.$router.push('/')
-          })
+        .then(() => {
+          this.$store.dispatch('redirection/pop')
+            .then(to => this.$router.push(to))
+            .catch(() => this.$router.push('/'))
         })
-        .catch(function (error) {
-          self.error = error.response.data
-          self.disabled = false
+        .catch(error => {
+          this.error = error.response.data
+          this.disabled = false
         })
     }
   }

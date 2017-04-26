@@ -3,16 +3,13 @@ import api from '@/api'
 export default {
   namespaced: true,
   state: {
-    isAuthenticated: false,
     user: null
   },
   mutations: {
     establishment (state, session) {
-      state.isAuthenticated = true
-      state.user = session
+      state.user = session.user
     },
     destruction (state) {
-      state.isAuthenticated = false
       state.user = null
     }
   },
