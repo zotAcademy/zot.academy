@@ -48,8 +48,8 @@ export default {
 
       var self = this
       api.post('/questions/', this.question)
-        .then(function (data) {
-          self.$router.push('/questions/' + data.id)
+        .then(function (response) {
+          self.$router.push('/questions/' + response.data.id)
         })
         .catch(function (error) {
           self.error = error.response.data
