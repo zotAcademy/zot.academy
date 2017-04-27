@@ -1,11 +1,5 @@
 <template>
   <div class="container my-3">
-    <div class="alert alert-danger alert-dismissible fade show" role="alert" v-if="error">
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close" @click="error = null">
-        <span aria-hidden="true">&times;</span>
-      </button>
-      <span class="error-message">{{ error.message }}</span>
-    </div>
     <app-question
       v-if="question"
       :question="question"

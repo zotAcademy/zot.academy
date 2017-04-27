@@ -1,17 +1,23 @@
 <template>
-  <div class="card mb-3">
-    <div class="card-block">
-      <p class="card-text"><small class="text-muted"><router-link class="text-muted" :to="'/' + question.user.username">@{{ question.user.username }}</router-link> asked {{ question.createdAt | fromNow }}</small></p>
-      <p class="card-text">{{ question.text }}</p>
-      <a :href="path" class="card-link" v-html="octicons.reply" @click.prevent></a>
-      <router-link class="card-link hidden-md-up" v-html="octicons.edit" :to="path + '/edit'" append v-if="editable"></router-link>
-      <a :href="path + '/edit'" class="card-link hidden-sm-down" v-html="octicons.edit" v-if="editable" @click.prevent></a>
-      <a :href="path" class="card-link" v-html="octicons.trashcan" v-if="deletable" @click.prevent="remove"></a>
+  <div class="container">
+    <app-alert v-if="error" class="alert-danger" :dismissible="true" @dismiss="error = null">
+      {{ error.message }}
+    </app-alert>
+    <div class="card">
+      <div class="card-block">
+        <p class="card-text"><small class="text-muted"><router-link class="text-muted" :to="'/' + question.user.username">@{{ question.user.username }}</router-link> asked {{ question.createdAt | fromNow }}</small></p>
+        <p class="card-text">{{ question.text }}</p>
+        <a :href="path" class="card-link" v-html="octicons.reply" @click.prevent></a>
+        <router-link class="card-link hidden-md-up" v-html="octicons.edit" :to="path + '/edit'" append v-if="editable"></router-link>
+        <a :href="path + '/edit'" class="card-link hidden-sm-down" v-html="octicons.edit" v-if="editable" @click.prevent></a>
+        <a :href="path" class="card-link" v-html="octicons.trashcan" v-if="deletable" @click.prevent="remove"></a>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import AppAlert from '@/components/AppAlert'
 import moment from 'moment'
 import { reply, pencil as edit, trashcan } from 'octicons'
 import api from '@/api'
@@ -19,6 +25,9 @@ import api from '@/api'
 export default {
   name: 'app-question',
   props: ['question'],
+  components: {
+    AppAlert
+  },
   data () {
     return {
       octicons: {
@@ -26,7 +35,7 @@ export default {
         reply: reply.toSVG(),
         trashcan: trashcan.toSVG()
       },
-      show: true
+      error: null
     }
   },
   computed: {
@@ -54,11 +63,6 @@ export default {
 </script>
 
 <style scoped>
-.card {
-  max-width: 36.875rem;
-  margin-left: auto;
-  margin-right: auto;
-}
 .card-text {
   white-space: pre-wrap;
 }

@@ -1,11 +1,8 @@
 <template>
   <div class="container my-3">
-    <div class="alert alert-danger alert-dismissible fade show" role="alert" v-if="error">
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close" @click="error = null">
-        <span aria-hidden="true">&times;</span>
-      </button>
-      <span class="error-message">{{ error.message }}</span>
-    </div>
+    <app-alert v-if="error" class="alert-danger" :dismissible="true" @dismiss="error = null">
+      {{ error.message }}
+    </app-alert>
     <div class="card mb-3">
       <div class="card-block">
         <h4 class="card-title">Log in</h4>
@@ -29,8 +26,13 @@
 </template>
 
 <script>
+import AppAlert from '@/components/AppAlert'
+
 export default {
   name: 'app-login',
+  components: {
+    AppAlert
+  },
   data () {
     return {
       credential: {
@@ -61,9 +63,5 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.error-message {
-  white-space: pre-wrap;
-}
 </style>

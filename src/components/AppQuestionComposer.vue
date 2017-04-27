@@ -1,11 +1,8 @@
 <template>
   <form @submit.prevent="post">
-    <div class="alert alert-danger alert-dismissible fade show" role="alert" v-if="error">
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close" @click="error = null">
-        <span aria-hidden="true">&times;</span>
-      </button>
-      <span class="error-message">{{ error.message }}</span>
-    </div>
+    <app-alert v-if="error" class="alert-danger" :dismissible="true" @dismiss="error = null">
+      {{ error.message }}
+    </app-alert>
     <div class="form-group">
       <textarea class="form-control" rows="3" placeholder="What are you wondering?" ref="textarea" v-model="question.text"></textarea>
     </div>
@@ -14,10 +11,14 @@
 </template>
 
 <script>
+import AppAlert from '@/components/AppAlert'
 import api from '@/api'
 
 export default {
   name: 'app-compose-question',
+  components: {
+    AppAlert
+  },
   data () {
     return {
       question: {
@@ -34,6 +35,7 @@ export default {
     post () {
       if (this.disabled) return
       this.disabled = true
+      this.error = null
 
       api.post('/questions/', this.question)
         .then(response => this.$router.push('/questions/' + response.data.id))
