@@ -10,9 +10,10 @@
       <div class="card-block">
         <p class="card-text"><small class="text-muted"><router-link class="text-muted" :to="'/' + question.user.username">@{{ question.user.username }}</router-link> asked {{ question.createdAt | fromNow }}</small></p>
         <p class="card-text">{{ question.text }}</p>
-        <a href="#" class="card-link" v-html="octicons.reply"></a>
-        <router-link class="card-link" v-html="octicons.edit" to="edit" append v-if="editable"></router-link>
-        <a href="#delete" class="card-link" v-html="octicons.trashcan" v-if="deletable" @click.prevent="del"></a>
+        <a :href="$route.path" class="card-link" v-html="octicons.reply" @click.prevent></a>
+        <router-link class="card-link hidden-md-up" v-html="octicons.edit" to="edit" append v-if="editable"></router-link>
+        <a :href="'/questions/' + id + '/edit'" class="card-link hidden-sm-down" v-html="octicons.edit" v-if="editable" @click.prevent></a>
+        <a :href="$route.path" class="card-link" v-html="octicons.trashcan" v-if="deletable" @click.prevent="del"></a>
       </div>
     </div>
   </div>
@@ -53,7 +54,7 @@ export default {
       return this.question.userId === this.$store.state.session.userId
     },
     deletable () {
-      return this.question.answers.length === 0
+      return this.editable && this.question.answers.length === 0
     }
   },
   filters: {

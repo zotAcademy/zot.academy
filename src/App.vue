@@ -31,6 +31,9 @@ export default {
 </script>
 
 <style>
+body {
+  padding-top: 3.5em;
+}
 .octicon {
   display: inline-block;
   vertical-align: text-top;

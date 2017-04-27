@@ -1,6 +1,6 @@
 <template>
   <div class="app-header">
-    <nav class="navbar navbar-toggleable-md navbar-light bg-faded navbar-fixed-top">
+    <nav class="navbar navbar-toggleable-md navbar-light bg-faded fixed-top">
       <button class="navbar-toggler navbar-toggler-right" type="button" aria-controls="navbarSupportedContent" :aria-expanded="navbar.expanded" aria-label="Toggle navigation" @click="navbar.expanded = !navbar.expanded">
         <span class="navbar-toggler-icon"></span>
       </button>
