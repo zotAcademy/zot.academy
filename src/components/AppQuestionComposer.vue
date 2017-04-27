@@ -50,7 +50,4 @@ export default {
 textarea {
   resize: none;
 }
-.error-message {
-  white-space: pre-wrap;
-}
 </style>

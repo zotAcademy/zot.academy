@@ -6,27 +6,23 @@
       </button>
       <span class="error-message">{{ error.message }}</span>
     </div>
-    <div class="card mb-3" v-if="question">
-      <div class="card-block">
-        <p class="card-text"><small class="text-muted"><router-link class="text-muted" :to="'/' + question.user.username">@{{ question.user.username }}</router-link> asked {{ question.createdAt | fromNow }}</small></p>
-        <p class="card-text">{{ question.text }}</p>
-        <a :href="$route.path" class="card-link" v-html="octicons.reply" @click.prevent></a>
-        <router-link class="card-link hidden-md-up" v-html="octicons.edit" to="edit" append v-if="editable"></router-link>
-        <a :href="'/questions/' + id + '/edit'" class="card-link hidden-sm-down" v-html="octicons.edit" v-if="editable" @click.prevent></a>
-        <a :href="$route.path" class="card-link" v-html="octicons.trashcan" v-if="deletable" @click.prevent="del"></a>
-      </div>
-    </div>
+    <app-question
+      v-if="question"
+      :question="question"
+      @remove="$router.back()"></app-question>
   </div>
 </template>
 
 <script>
-import moment from 'moment'
-import { reply, pencil as edit, trashcan } from 'octicons'
+import AppQuestion from '@/components/AppQuestion'
 import api from '@/api'
 
 export default {
   name: 'question',
   props: ['id'],
+  components: {
+    AppQuestion
+  },
   beforeRouteUpdate (to, from, next) {
     api.get('/questions/' + to.params.id)
       .then(response => { this.question = response.data })
@@ -40,42 +36,12 @@ export default {
   },
   data () {
     return {
-      octicons: {
-        edit: edit.toSVG(),
-        reply: reply.toSVG(),
-        trashcan: trashcan.toSVG()
-      },
       question: null,
       error: null
-    }
-  },
-  computed: {
-    editable () {
-      return this.question.userId === this.$store.state.session.userId
-    },
-    deletable () {
-      return this.editable && this.question.answers.length === 0
-    }
-  },
-  filters: {
-    fromNow: date => moment(date).fromNow()
-  },
-  methods: {
-    del () {
-      api.delete('/questions/' + this.id)
-        .then(response => this.$router.push('/'))
-        .catch(error => { this.error = error.response.data })
     }
   }
 }
 </script>
 
 <style scoped>
-.error-message,
-.card-text {
-  white-space: pre-wrap;
-}
-.container {
-  max-width: 36.875rem;
-}
 </style>

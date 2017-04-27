@@ -39,4 +39,10 @@ body {
   vertical-align: text-top;
   fill: currentColor;
 }
+.container {
+  max-width: 52.5em;
+}
+.error-message {
+  white-space: pre-wrap;
+}
 </style>

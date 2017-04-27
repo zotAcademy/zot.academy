@@ -14,6 +14,7 @@ export default new Router({
   mode: 'history',
   routes: [{
     path: '/',
+    name: 'home',
     component: Home
   }, {
     path: '/signup',
@@ -35,6 +36,7 @@ export default new Router({
     }
   }, {
     path: '/questions/:id',
+    name: 'question',
     component: Question,
     props: true
   }, {
