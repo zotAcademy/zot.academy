@@ -23,6 +23,8 @@
 </template>
 
 <script>
+import api from '@/api'
+
 export default {
   name: 'app-new-question',
   data () {
@@ -39,7 +41,7 @@ export default {
       if (this.disabled) return
       this.disabled = true
 
-      this.$store.dispatch('question/post', this.question)
+      api.post('/questions/', this.question)
         .then(response => this.$router.push('/questions/' + response.data.id))
         .catch(error => {
           this.error = error.response.data

@@ -6,6 +6,7 @@ import Login from '@/views/Login'
 import Logout from '@/views/Logout'
 import NotFound from '@/views/NotFound'
 import NewQuestion from '@/views/NewQuestion'
+import Question from '@/views/Question'
 
 Vue.use(Router)
 
@@ -31,6 +32,10 @@ export default new Router({
     meta: {
       auth: true
     }
+  }, {
+    path: '/questions/:id',
+    component: Question,
+    props: true
   }, {
     path: '*',
     component: NotFound
