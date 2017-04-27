@@ -60,7 +60,7 @@ export default {
     fromNow: date => moment(date).fromNow()
   },
   methods: {
-    del (data) {
+    del () {
       api.delete('/questions/' + this.id)
         .then(response => this.$router.push('/'))
         .catch(error => { this.error = error.response.data })
