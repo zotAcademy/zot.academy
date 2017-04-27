@@ -1,6 +1,6 @@
 <template>
-  <div class="container my-3">
-    <app-question
+  <div class="container">
+    <app-question class="my-3"
       v-for="(question, index) in questions"
       :key="question.id"
       :question="question"
