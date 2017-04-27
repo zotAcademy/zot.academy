@@ -31,10 +31,10 @@ import api from '@/api'
 export default {
   name: 'question',
   props: ['id'],
-  beforeRouteEnter (to, from, next) {
-    api.get('/questions/' + to.params.id)
-      .then(response => next(vm => vm.setData(response.data)))
-      .catch(error => next(vm => vm.setError(error)))
+  created () {
+    api.get('/questions/' + this.id)
+      .then(response => { this.question = response.data })
+      .catch(error => { this.error = error.response.data })
   },
   data () {
     return {
