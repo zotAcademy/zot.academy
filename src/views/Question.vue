@@ -12,7 +12,7 @@
         <p class="card-text">{{ question.text }}</p>
         <a href="#" class="card-link" v-html="octicons.reply"></a>
         <router-link class="card-link" v-html="octicons.edit" to="edit" append v-if="editable"></router-link>
-        <a href="#" class="card-link" v-html="octicons.trashcan" v-if="editable"></a>
+        <a href="#delete" class="card-link" v-html="octicons.trashcan" v-if="deletable" @click.prevent="del"></a>
       </div>
     </div>
   </div>
@@ -51,17 +51,19 @@ export default {
   computed: {
     editable () {
       return this.question.userId === this.$store.state.session.userId
+    },
+    deletable () {
+      return this.question.answers.length === 0
     }
   },
   filters: {
     fromNow: date => moment(date).fromNow()
   },
   methods: {
-    setData (data) {
-      this.question = data
-    },
-    setError (error) {
-      this.error = error.response.data
+    del (data) {
+      api.delete('/questions/' + this.id)
+        .then(response => this.$router.push('/'))
+        .catch(error => { this.error = error.response.data })
     }
   }
 }
