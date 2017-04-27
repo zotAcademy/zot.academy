@@ -8,12 +8,7 @@
     </div>
     <div class="card mb-3" v-if="question">
       <div class="card-block">
-        <p class="card-text">
-          <small class="text-muted">
-            <router-link class="text-muted" :to="'/' + question.user.username">@{{ question.user.username }}</router-link>
-            asked {{ question.createdAt | fromNow }}
-          </small>
-        </p>
+        <p class="card-text"><small class="text-muted"><router-link class="text-muted" :to="'/' + question.user.username">@{{ question.user.username }}</router-link> asked {{ question.createdAt | fromNow }}</small></p>
         <p class="card-text">{{ question.text }}</p>
         <a href="#" class="card-link" v-html="octicons.reply"></a>
         <router-link class="card-link" v-html="octicons.edit" to="edit" append v-if="editable"></router-link>
@@ -72,9 +67,9 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.error-message {
+.error-message,
+.card-text {
   white-space: pre-wrap;
 }
 .container {
