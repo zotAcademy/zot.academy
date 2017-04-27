@@ -7,11 +7,17 @@
       <span class="error-message">{{ error.message }}</span>
     </div>
     <div class="card mb-3" v-if="question">
-      <div class="card-header">
-        @{{ question.user.username }} asked {{ question.createdAt | fromNow }}
-      </div>
       <div class="card-block">
-        {{ question.text }}
+        <p class="card-text">
+          <small class="text-muted">
+            <router-link class="text-muted" :to="'/' + question.user.username">@{{ question.user.username }}</router-link>
+            asked {{ question.createdAt | fromNow }}
+          </small>
+        </p>
+        <p class="card-text">{{ question.text }}</p>
+        <a href="#" class="card-link" v-html="octicons.reply"></a>
+        <a href="#" class="card-link" v-html="octicons.edit" v-if="editable"></a>
+        <a href="#" class="card-link" v-html="octicons.trashcan" v-if="editable"></a>
       </div>
     </div>
   </div>
@@ -19,6 +25,7 @@
 
 <script>
 import moment from 'moment'
+import { reply, pencil as edit, trashcan } from 'octicons'
 import api from '@/api'
 
 export default {
@@ -31,8 +38,18 @@ export default {
   },
   data () {
     return {
+      octicons: {
+        edit: edit.toSVG(),
+        reply: reply.toSVG(),
+        trashcan: trashcan.toSVG()
+      },
       question: null,
       error: null
+    }
+  },
+  computed: {
+    editable () {
+      return this.question.userId === this.$store.state.session.userId
     }
   },
   filters: {
