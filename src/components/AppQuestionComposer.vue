@@ -7,7 +7,7 @@
       <span class="error-message">{{ error.message }}</span>
     </div>
     <div class="form-group">
-      <textarea class="form-control" rows="3" placeholder="What are you wondering?" v-model="question.text"></textarea>
+      <textarea class="form-control" rows="3" placeholder="What are you wondering?" ref="textarea" v-model="question.text"></textarea>
     </div>
     <button type="submit" class="btn btn-primary float-right" :disabled="disabled">Ask</button>
   </form>
@@ -27,6 +27,9 @@ export default {
       error: null
     }
   },
+  mounted () {
+    this.$refs.textarea.focus()
+  },
   methods: {
     post () {
       if (this.disabled) return
@@ -43,7 +46,6 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 textarea {
   resize: none;
