@@ -28,6 +28,7 @@ export default new Router({
     component: Logout
   }, {
     path: '/questions/new',
+    name: 'new-question',
     component: NewQuestion,
     meta: {
       auth: true

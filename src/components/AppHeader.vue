@@ -25,7 +25,7 @@
                   @{{ username }}
                 </a>
                 <router-link class="btn btn-outline-primary py-1 px-2 hidden-md-up" to="/questions/new" v-html="octicons.ask"></router-link>
-                <a class="btn btn-outline-primary py-1 px-2 hidden-sm-down" href="#" v-html="octicons.ask" @click.prevent="compose"></a>
+                <a class="btn btn-outline-primary py-1 px-2 hidden-sm-down" href="/questions/new" v-html="octicons.ask" @click.prevent="compose"></a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                   <router-link class="dropdown-item" :to="'/' + username">View profile</router-link>
                   <div class="dropdown-divider"></div>
@@ -92,7 +92,9 @@ export default {
   },
   methods: {
     compose () {
-      this.$store.commit('modal/show', 'question-composer-modal')
+      if (this.$route.name !== 'new-question') {
+        this.$store.commit('modal/show', 'question-composer-modal')
+      }
     },
     closeDropdown () {
       this.dropdown.expanded = false
@@ -101,7 +103,6 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" atribute to limit CSS to this component only -->
 <style scoped>
 .progress {
   position: absolute;
