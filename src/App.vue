@@ -7,6 +7,7 @@
       </slide-fade-transition>
       <app-footer slot="footer"></app-footer>
     </app-layout>
+    <modal></modal>
   </div>
 </template>
 
@@ -14,6 +15,7 @@
 import AppLayout from '@/components/AppLayout'
 import AppHeader from '@/components/AppHeader'
 import AppFooter from '@/components/AppFooter'
+import Modal from '@/modals/Modal'
 import SlideFadeTransition from '@/transitions/SlideFade'
 
 export default {
@@ -22,6 +24,7 @@ export default {
     AppLayout,
     AppHeader,
     AppFooter,
+    Modal,
     SlideFadeTransition
   }
 }

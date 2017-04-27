@@ -16,7 +16,7 @@
         </p>
         <p class="card-text">{{ question.text }}</p>
         <a href="#" class="card-link" v-html="octicons.reply"></a>
-        <a href="#" class="card-link" v-html="octicons.edit" v-if="editable"></a>
+        <router-link class="card-link" v-html="octicons.edit" to="edit" append v-if="editable"></router-link>
         <a href="#" class="card-link" v-html="octicons.trashcan" v-if="editable"></a>
       </div>
     </div>
@@ -31,6 +31,12 @@ import api from '@/api'
 export default {
   name: 'question',
   props: ['id'],
+  beforeRouteUpdate (to, from, next) {
+    api.get('/questions/' + to.params.id)
+      .then(response => { this.question = response.data })
+      .catch(error => { this.error = error.response.data })
+    next()
+  },
   created () {
     api.get('/questions/' + this.id)
       .then(response => { this.question = response.data })
