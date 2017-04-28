@@ -1,5 +1,5 @@
 <template>
-  <div class="container my-3">
+  <div class="container">
     <app-post
       v-if="post"
       :post="post"

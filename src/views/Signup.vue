@@ -1,5 +1,7 @@
 <template>
-  <app-signup></app-signup>
+  <div class="container">
+    <app-signup></app-signup>
+  </div>
 </template>
 
 <script>

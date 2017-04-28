@@ -2,8 +2,6 @@
 </template>
 
 <script>
-import AppError from '@/components/AppError'
-
 export default {
   name: 'not-found',
   beforeCreate () {
@@ -12,9 +10,6 @@ export default {
         status: 404
       }
     })
-  },
-  components: {
-    AppError
   }
 }
 </script>

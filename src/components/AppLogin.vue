@@ -1,9 +1,9 @@
 <template>
-  <div class="container my-3">
+  <div>
     <app-alert v-if="error" class="alert-danger" :dismissible="true" @dismiss="error = null">
       {{ error.message }}
     </app-alert>
-    <div class="card mb-3">
+    <div class="card my-3">
       <div class="card-block">
         <h4 class="card-title">Log in</h4>
         <form @submit.prevent="login">
@@ -17,7 +17,7 @@
         </form>
       </div>
     </div>
-    <div class="card mb-3">
+    <div class="card my-3">
       <div class="card-block">
         <p class="card-text">New to Zot Academy? <router-link to="/signup">Create an account</router-link>.</p>
       </div>

@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: 'app-error',
+  name: 'error',
   computed: {
     status () {
       return this.$store.state.error.response.status

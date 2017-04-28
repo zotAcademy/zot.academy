@@ -3,7 +3,7 @@
     <app-layout>
       <app-header slot="header"></app-header>
       <slide-fade-transition mode="out-in">
-        <app-error v-if="$store.state.error.response"></app-error>
+        <error v-if="$store.state.error.response"></error>
         <router-view v-else></router-view>
       </slide-fade-transition>
       <app-footer slot="footer"></app-footer>
@@ -16,7 +16,7 @@
 import AppLayout from '@/components/AppLayout'
 import AppHeader from '@/components/AppHeader'
 import AppFooter from '@/components/AppFooter'
-import AppError from '@/components/AppError'
+import Error from '@/views/Error'
 import Modal from '@/modals/Modal'
 import SlideFadeTransition from '@/transitions/SlideFade'
 
@@ -26,7 +26,7 @@ export default {
     AppLayout,
     AppHeader,
     AppFooter,
-    AppError,
+    Error,
     Modal,
     SlideFadeTransition
   }

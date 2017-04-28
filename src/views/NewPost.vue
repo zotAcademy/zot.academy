@@ -1,6 +1,6 @@
 <template>
-  <div class="container my-3">
-    <div class="card mb-3">
+  <div class="container">
+    <div class="card my-3">
       <div class="card-header text-center">
         Compose new Post
       </div>

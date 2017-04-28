@@ -1,6 +1,6 @@
 <template>
-  <div class="container my-3">
-    <div class="card mb-3">
+  <div>
+    <div class="card my-3">
       <div class="card-block">
         <p class="card-text">Have an account? <router-link to="/login">Log in</router-link>.</p>
       </div>
@@ -8,7 +8,7 @@
     <app-alert v-if="error" class="alert-danger" :dismissible="true" @dismiss="error = null">
       {{ error.message }}
     </app-alert>
-    <div class="card mb-3">
+    <div class="card my-3">
       <div class="card-block">
         <h4 class="card-title">Sign up</h4>
         <form @submit.prevent="signup">
