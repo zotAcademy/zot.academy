@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div>
     <app-alert v-if="error" class="alert-danger" :dismissible="true" @dismiss="error = null">
       {{ error.message }}
     </app-alert>
