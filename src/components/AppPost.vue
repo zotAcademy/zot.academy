@@ -7,9 +7,13 @@
       <div class="card-block">
         <p class="card-text"><small class="text-muted"><router-link class="text-muted" :to="'/' + post.user.username">@{{ post.user.username }}</router-link> asked {{ post.createdAt | fromNow }}</small></p>
         <p class="card-text">{{ post.text }}</p>
-        <a :href="path" class="card-link" v-html="octicons['comment-discussion'].toSVG()" @click.prevent></a>
-        <router-link class="card-link hidden-md-up" v-html="octicons.pencil.toSVG()" :to="path + '/edit'" append v-if="editable"></router-link>
+
+        <a :href="path" class="card-link" v-html="octicons.reply.toSVG()" v-if="$route.name === 'post'" @click.prevent></a>
+        <router-link class="card-link" v-html="octicons['comment-discussion'].toSVG()" :to="path" v-else></router-link>
+
+        <router-link class="card-link hidden-md-up" v-html="octicons.pencil.toSVG()" :to="path + '/edit'" v-if="editable"></router-link>
         <a :href="path + '/edit'" class="card-link hidden-sm-down" v-html="octicons.pencil.toSVG()" v-if="editable" @click.prevent></a>
+
         <a :href="path" class="card-link" v-html="octicons.trashcan.toSVG()" v-if="deletable" @click.prevent="remove"></a>
       </div>
     </div>
