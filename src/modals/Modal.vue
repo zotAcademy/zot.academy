@@ -1,5 +1,5 @@
 <template>
-  <div v-if="component">
+  <div class="modal-open" v-if="component">
     <div class="modal show">
       <div class="modal-dialog" role="document">
         <component :is="component"></component>

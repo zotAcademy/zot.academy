@@ -50,6 +50,6 @@ export default {
 
 <style scoped>
 textarea {
-  resize: none;
+  resize: vertical;
 }
 </style>
