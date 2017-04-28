@@ -40,9 +40,6 @@ body {
   fill: currentColor;
 }
 .container {
-  max-width: 52.5em;
-}
-.error-message {
-  white-space: pre-wrap;
+  max-width: 590px;
 }
 </style>

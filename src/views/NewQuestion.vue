@@ -23,7 +23,4 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  max-width: 36.875rem;
-}
 </style>

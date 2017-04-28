@@ -13,9 +13,8 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .container {
-  max-width: 26.25rem;
+  max-width: 430px;
 }
 </style>
