@@ -1,11 +1,12 @@
 <template>
   <div class="container">
-    <app-post
-      v-for="(post, index) in posts"
-      :key="post.id"
-      :post="post"
-      @remove="posts.splice(index, 1)"></app-post>
-    </div>
+    <transition-group class="posts" name="slide-fade" tag="div">
+      <app-post class="post"
+        v-for="(post, index) in posts"
+        :key="post.id"
+        :post="post"
+        @remove="posts.splice(index, 1)"></app-post>
+    </transition-group>
   </div>
 </template>
 
@@ -32,4 +33,17 @@ export default {
 </script>
 
 <style scoped>
+.posts {
+  position: relative;
+}
+.post {
+  transition: all 1s;
+}
+.slide-fade-leave-to {
+  opacity: 0;
+}
+.slide-fade-leave-active {
+  position: absolute;
+  width: 100%;
+}
 </style>
