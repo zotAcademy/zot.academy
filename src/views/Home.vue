@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <app-post class="my-3"
+    <app-post
       v-for="(post, index) in posts"
       :key="post.id"
       :post="post"
