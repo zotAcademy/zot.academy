@@ -12,7 +12,7 @@
         <router-link class="card-link" v-html="octicons['comment-discussion'].toSVG()" :to="path" v-else></router-link>
 
         <router-link class="card-link hidden-md-up" v-html="octicons.pencil.toSVG()" :to="path + '/edit'" v-if="editable"></router-link>
-        <a :href="path + '/edit'" class="card-link hidden-sm-down" v-html="octicons.pencil.toSVG()" v-if="editable" @click.prevent></a>
+        <a :href="path + '/edit'" class="card-link hidden-sm-down" v-html="octicons.pencil.toSVG()" v-if="editable" @click.prevent="edit"></a>
 
         <a :href="path" class="card-link" v-html="octicons.trashcan.toSVG()" v-if="deletable" @click.prevent="remove"></a>
       </div>
@@ -46,13 +46,16 @@ export default {
       return this.post.userId === this.$store.state.session.userId
     },
     deletable () {
-      return this.editable && this.post.comments.length === 0
+      return this.editable && (this.post.commentsCount != null ? this.post.commentsCount : this.post.comments.length) === 0
     }
   },
   filters: {
     fromNow: date => moment(date).fromNow()
   },
   methods: {
+    edit () {
+      this.$store.commit('modal/show', 'post-composer-modal')
+    },
     remove () {
       api.delete('/posts/' + this.post.id)
         .then(response => { this.$emit('remove') })
