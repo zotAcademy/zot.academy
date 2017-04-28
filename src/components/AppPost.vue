@@ -5,8 +5,8 @@
     </app-alert>
     <div class="card">
       <div class="card-block">
-        <p class="card-text"><small class="text-muted"><router-link class="text-muted" :to="'/' + question.user.username">@{{ question.user.username }}</router-link> asked {{ question.createdAt | fromNow }}</small></p>
-        <p class="card-text">{{ question.text }}</p>
+        <p class="card-text"><small class="text-muted"><router-link class="text-muted" :to="'/' + post.user.username">@{{ post.user.username }}</router-link> asked {{ post.createdAt | fromNow }}</small></p>
+        <p class="card-text">{{ post.text }}</p>
         <a :href="path" class="card-link" v-html="octicons['comment-discussion'].toSVG()" @click.prevent></a>
         <router-link class="card-link hidden-md-up" v-html="octicons.pencil.toSVG()" :to="path + '/edit'" append v-if="editable"></router-link>
         <a :href="path + '/edit'" class="card-link hidden-sm-down" v-html="octicons.pencil.toSVG()" v-if="editable" @click.prevent></a>
@@ -23,8 +23,8 @@ import octicons from 'octicons'
 import api from '@/api'
 
 export default {
-  name: 'app-question',
-  props: ['question'],
+  name: 'app-post',
+  props: ['post'],
   components: {
     AppAlert
   },
@@ -36,13 +36,13 @@ export default {
   },
   computed: {
     path () {
-      return '/questions/' + this.question.id
+      return '/posts/' + this.post.id
     },
     editable () {
-      return this.question.userId === this.$store.state.session.userId
+      return this.post.userId === this.$store.state.session.userId
     },
     deletable () {
-      return this.editable && this.question.answers.length === 0
+      return this.editable && this.post.comments.length === 0
     }
   },
   filters: {
@@ -50,7 +50,7 @@ export default {
   },
   methods: {
     remove () {
-      api.delete('/questions/' + this.question.id)
+      api.delete('/posts/' + this.post.id)
         .then(response => { this.$emit('remove') })
         .catch(error => { this.error = error.response.data })
     }

@@ -10,12 +10,12 @@
 </template>
 
 <script>
-import QuestionComposerModal from '@/modals/QuestionComposer'
+import PostComposerModal from '@/modals/PostComposer'
 
 export default {
   name: 'modal',
   components: {
-    QuestionComposerModal
+    PostComposerModal
   },
   watch: {
     '$route' () {

@@ -1,36 +1,36 @@
 <template>
   <div class="container my-3">
-    <app-question
-      v-if="question"
-      :question="question"
-      @remove="$router.back()"></app-question>
+    <app-post
+      v-if="post"
+      :post="post"
+      @remove="$router.back()"></app-post>
   </div>
 </template>
 
 <script>
-import AppQuestion from '@/components/AppQuestion'
+import AppPost from '@/components/AppPost'
 import api from '@/api'
 
 export default {
-  name: 'question',
+  name: 'post',
   props: ['id'],
   components: {
-    AppQuestion
+    AppPost
   },
   beforeRouteUpdate (to, from, next) {
-    api.get('/questions/' + to.params.id)
-      .then(response => { this.question = response.data })
+    api.get('/posts/' + to.params.id)
+      .then(response => { this.post = response.data })
       .catch(error => { this.error = error.response.data })
     next()
   },
   created () {
-    api.get('/questions/' + this.id)
-      .then(response => { this.question = response.data })
+    api.get('/posts/' + this.id)
+      .then(response => { this.post = response.data })
       .catch(error => { this.error = error.response.data })
   },
   data () {
     return {
-      question: null,
+      post: null,
       error: null
     }
   }

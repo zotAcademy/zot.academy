@@ -2,22 +2,22 @@
   <div class="container my-3">
     <div class="card mb-3">
       <div class="card-header text-center">
-        Ask new question
+        Compose new Post
       </div>
       <div class="card-block">
-        <app-question-composer></app-question-composer>
+        <app-post-composer></app-post-composer>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import AppQuestionComposer from '@/components/AppQuestionComposer'
+import AppPostComposer from '@/components/AppPostComposer'
 
 export default {
-  name: 'new-question',
+  name: 'new-post',
   components: {
-    AppQuestionComposer
+    AppPostComposer
   }
 }
 </script>

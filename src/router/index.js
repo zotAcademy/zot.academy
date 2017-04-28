@@ -5,8 +5,8 @@ import Signup from '@/views/Signup'
 import Login from '@/views/Login'
 import Logout from '@/views/Logout'
 import NotFound from '@/views/NotFound'
-import NewQuestion from '@/views/NewQuestion'
-import Question from '@/views/Question'
+import NewPost from '@/views/NewPost'
+import Post from '@/views/Post'
 
 Vue.use(Router)
 
@@ -28,16 +28,16 @@ export default new Router({
     path: '/logout',
     component: Logout
   }, {
-    path: '/questions/new',
-    name: 'new-question',
-    component: NewQuestion,
+    path: '/posts/new',
+    name: 'new-post',
+    component: NewPost,
     meta: {
       auth: true
     }
   }, {
-    path: '/questions/:id',
-    name: 'question',
-    component: Question,
+    path: '/posts/:id',
+    name: 'post',
+    component: Post,
     props: true
   }, {
     path: '*',
