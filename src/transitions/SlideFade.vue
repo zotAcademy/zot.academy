@@ -11,7 +11,6 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" atribute to limit CSS to this component only -->
 <style scoped>
 .slide-fade-enter-active {
   transition: all .1s ease;

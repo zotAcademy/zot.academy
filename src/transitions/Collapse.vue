@@ -25,7 +25,6 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" atribute to limit CSS to this component only -->
 <style scoped>
 .collapse-enter-active, .collapse-leave-active {
   overflow-y: hidden;
