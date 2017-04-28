@@ -5,7 +5,7 @@
         <p class="card-text">Have an account? <router-link to="/login">Log in</router-link>.</p>
       </div>
     </div>
-    <app-alert v-if="error" class="alert-danger" :dismissible="true" @dismiss="error = null">
+    <app-alert v-if="error" class="alert-danger my-3" :dismissible="true" @dismiss="error = null">
       {{ error.message }}
     </app-alert>
     <div class="card my-3">

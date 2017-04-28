@@ -37,7 +37,7 @@ export default {
   position: relative;
 }
 .post {
-  transition: all 1s;
+  transition: all .6s;
 }
 .slide-fade-leave-to {
   opacity: 0;
