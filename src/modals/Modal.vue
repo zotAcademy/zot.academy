@@ -1,11 +1,15 @@
 <template>
-  <div class="modal-open" v-if="component">
-    <div class="modal show">
-      <div class="modal-dialog" role="document">
-        <component :is="component"></component>
+  <div class="modal-open">
+    <transition name="slide-fade">
+      <div class="modal show" v-if="component">
+        <div class="modal-dialog" role="document">
+          <component :is="component"></component>
+        </div>
       </div>
-    </div>
-    <div class="modal-backdrop show"></div>
+    </transition>
+    <transition name="fade">
+      <div class="modal-backdrop show" v-if="component"></div>
+    </transition>
   </div>
 </template>
 
@@ -31,7 +35,20 @@ export default {
 </script>
 
 <style scoped>
-.modal.show {
+.show {
   display: block;
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .3s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+.slide-fade-enter-active, .slide-fade-leave-active {
+  transition: all .3s;
+}
+.slide-fade-enter, .slide-fade-leave-to {
+  transform: translateY(-60px);
+  opacity: 0;
 }
 </style>

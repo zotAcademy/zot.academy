@@ -28,7 +28,7 @@ export default {
 <style scoped>
 .collapse-enter-active, .collapse-leave-active {
   overflow-y: hidden;
-  transition: max-height .35s ease;
+  transition: max-height .3s ease;
 }
 .collapse-enter, .collapse-leave-to {
   max-height: 0!important;
