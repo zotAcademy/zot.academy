@@ -20,18 +20,17 @@ export default {
   beforeRouteUpdate (to, from, next) {
     api.get('/posts/' + to.params.id)
       .then(response => { this.post = response.data })
-      .catch(error => { this.error = error.response.data })
+      .catch(error => this.$store.commit('error/throw', error))
     next()
   },
   created () {
     api.get('/posts/' + this.id)
       .then(response => { this.post = response.data })
-      .catch(error => { this.error = error.response.data })
+      .catch(error => this.$store.commit('error/throw', error))
   },
   data () {
     return {
-      post: null,
-      error: null
+      post: null
     }
   }
 }

@@ -21,12 +21,11 @@ export default {
   created () {
     api.get('/posts/')
       .then(response => { this.posts = response.data })
-      .catch(error => { this.error = error.response.data })
+      .catch(error => this.$store.commit('error/throw', error))
   },
   data () {
     return {
-      posts: [],
-      error: null
+      posts: []
     }
   }
 }

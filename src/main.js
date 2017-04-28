@@ -31,5 +31,7 @@ router.beforeEach((to, from, next) => {
       return next(from)
     }
   }
+
+  store.commit('error/catch')
   next()
 })

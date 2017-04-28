@@ -23,7 +23,7 @@ api.interceptors.response.use(response => {
   if (error.response == null) {
     error.response = {
       data: {
-        message: 'Could not connect to the server.'
+        message: 'Unable to connect to the server.'
       },
       statusText: 'Network Error'
     }
