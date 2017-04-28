@@ -108,6 +108,7 @@ export default {
 
 <style scoped>
 .container {
+  position: static;
   max-width: 890px;
 }
 .progress {
