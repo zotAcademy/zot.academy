@@ -7,10 +7,10 @@
       <div class="card-block">
         <p class="card-text"><small class="text-muted"><router-link class="text-muted" :to="'/' + question.user.username">@{{ question.user.username }}</router-link> asked {{ question.createdAt | fromNow }}</small></p>
         <p class="card-text">{{ question.text }}</p>
-        <a :href="path" class="card-link" v-html="octicons.reply" @click.prevent></a>
-        <router-link class="card-link hidden-md-up" v-html="octicons.edit" :to="path + '/edit'" append v-if="editable"></router-link>
-        <a :href="path + '/edit'" class="card-link hidden-sm-down" v-html="octicons.edit" v-if="editable" @click.prevent></a>
-        <a :href="path" class="card-link" v-html="octicons.trashcan" v-if="deletable" @click.prevent="remove"></a>
+        <a :href="path" class="card-link" v-html="octicons['comment-discussion'].toSVG()" @click.prevent></a>
+        <router-link class="card-link hidden-md-up" v-html="octicons.pencil.toSVG()" :to="path + '/edit'" append v-if="editable"></router-link>
+        <a :href="path + '/edit'" class="card-link hidden-sm-down" v-html="octicons.pencil.toSVG()" v-if="editable" @click.prevent></a>
+        <a :href="path" class="card-link" v-html="octicons.trashcan.toSVG()" v-if="deletable" @click.prevent="remove"></a>
       </div>
     </div>
   </div>
@@ -19,7 +19,7 @@
 <script>
 import AppAlert from '@/components/AppAlert'
 import moment from 'moment'
-import { reply, pencil as edit, trashcan } from 'octicons'
+import octicons from 'octicons'
 import api from '@/api'
 
 export default {
@@ -30,11 +30,7 @@ export default {
   },
   data () {
     return {
-      octicons: {
-        edit: edit.toSVG(),
-        reply: reply.toSVG(),
-        trashcan: trashcan.toSVG()
-      },
+      octicons,
       error: null
     }
   },
