@@ -68,5 +68,6 @@ export default {
 <style scoped>
 .card-text {
   white-space: pre-wrap;
+  word-break: break-word;
 }
 </style>
