@@ -2,7 +2,7 @@
   <div id="app">
     <app-layout>
       <app-header slot="header"></app-header>
-      <slide-fade-transition mode="out-in">
+      <slide-fade-transition :name="name" mode="out-in">
         <error v-if="$store.state.error.response"></error>
         <router-view v-else></router-view>
       </slide-fade-transition>
@@ -29,6 +29,16 @@ export default {
     Error,
     Modal,
     SlideFadeTransition
+  },
+  data () {
+    return {
+      name: null
+    }
+  },
+  watch: {
+    '$route' (to, from) {
+      this.name = to.path.split('/').length < from.path.split('/').length ? 'slide-fade-right' : 'slide-fade-left'
+    }
   }
 }
 </script>
