@@ -3,7 +3,6 @@ import Router from 'vue-router'
 import Home from '@/views/Home'
 import Signup from '@/views/Signup'
 import Login from '@/views/Login'
-import Logout from '@/views/Logout'
 import NotFound from '@/views/NotFound'
 import NewPost from '@/views/NewPost'
 import Post from '@/views/Post'
@@ -24,9 +23,6 @@ export default new Router({
     path: '/login',
     name: 'login',
     component: Login
-  }, {
-    path: '/logout',
-    component: Logout
   }, {
     path: '/posts/new',
     name: 'new-post',

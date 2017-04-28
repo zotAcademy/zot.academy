@@ -30,7 +30,7 @@
                   <router-link class="dropdown-item" :to="'/' + username">View profile</router-link>
                   <div class="dropdown-divider"></div>
                   <router-link class="dropdown-item" to="/settings">Settings</router-link>
-                  <router-link class="dropdown-item" to="/logout" @click="dropdown.expanded = false">Log out</router-link>
+                  <a class="dropdown-item" :href="$route.path" @click.prevent="logout">Log out</a>
                 </div>
               </li>
               <li class="nav-item mt-2 mt-lg-0" v-else key="isUnauthenticated">
@@ -94,6 +94,11 @@ export default {
     },
     closeDropdown () {
       this.dropdown.expanded = false
+    },
+    logout () {
+      this.$store.dispatch('session/logout')
+        .then(() => this.closeDropdown())
+        .catch(() => {})
     }
   }
 }
