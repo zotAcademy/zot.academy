@@ -6,7 +6,7 @@
     <div class="card">
       <div class="card-block">
         <p class="card-text"><small class="text-muted"><router-link class="text-muted" :to="'/' + post.user.username">@{{ post.user.username }}</router-link> posted {{ post.createdAt | fromNow }}</small></p>
-        <p class="card-text">{{ post.text }}</p>
+        <p class="card-text" v-html="post.html"></p>
 
         <a :href="path" class="card-link" v-html="octicons.reply.toSVG()" v-if="$route.name === 'post'" @click.prevent></a>
         <router-link class="card-link" v-html="octicons['comment-discussion'].toSVG()" :to="path" v-else></router-link>
