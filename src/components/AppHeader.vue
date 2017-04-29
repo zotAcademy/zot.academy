@@ -11,7 +11,9 @@
           <div class="collapse navbar-collapse show" id="navbarSupportedContent" v-show="navbar.expanded">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item">
-                <router-link class="nav-link" to="/" active-class="active" exact>Home</router-link>
+                <router-link class="nav-link" to="/" active-class="active" exact>
+                  <span v-html="octicons.home.toSVG()"></span> Home
+                </router-link>
               </li>
             </ul>
             <ul class="navbar-nav d-inline-flex">
