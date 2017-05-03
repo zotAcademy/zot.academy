@@ -4,7 +4,7 @@
     <h1> About Zot Accademy </h1>
     </div>
     <p>Zot Accademy is a revolutionized forum that UCI students and faculty can utilize to get expert help from each other.</p>
-    <p>Sugar plum muffin cookie pastry oat cake icing candy canes chocolate. Gummi bears chupa chups fruitcake dessert jelly. Muffin cookie ice cream soufflé pastry lollipop gingerbread sweet. Unerdwear.com bonbon candy marzipan bonbon gummies chocolate cake gummi bears powder. Unerdwear.com tart halvah chocolate cake dragée liquorice. Sugar plum chocolate bar pastry liquorice dragée jelly powder. Jelly tootsie roll applicake caramels. Marzipan candy tootsie roll donut. Gummies ice cream macaroon applicake.</p>
+    <p>Basically we are the better reddit.</p>
 <br>
 <br>
       <h1 class="text-center">About Us</h1>
