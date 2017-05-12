@@ -22,6 +22,7 @@ export default {
   data () {
     return {
       post: {
+        id: null,
         text: ''
       },
       disabled: false,
@@ -29,6 +30,9 @@ export default {
     }
   },
   mounted () {
+    if (this.$store.state.modal.payload) {
+      this.post = Object.assign({}, this.$store.state.modal.payload)
+    }
     this.$refs.textarea.focus()
   },
   methods: {
@@ -37,7 +41,7 @@ export default {
       this.disabled = true
       this.error = null
 
-      api.post('/posts/', this.post)
+      api[ this.post.id ? 'patch' : 'post' ]('/posts/' + (this.post.id || ''), this.post)
         .then(response => this.$router.push('/posts/' + response.data.id))
         .catch(error => {
           this.error = error.response.data

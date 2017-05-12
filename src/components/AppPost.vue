@@ -54,7 +54,10 @@ export default {
   },
   methods: {
     edit () {
-      this.$store.commit('modal/show', 'post-composer-modal')
+      this.$store.commit('modal/show', {
+        component: 'post-composer-modal',
+        payload: this.post
+      })
     },
     remove () {
       api.delete('/posts/' + this.post.id)
