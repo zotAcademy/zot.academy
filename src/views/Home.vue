@@ -19,14 +19,22 @@ export default {
   components: {
     AppPost
   },
-  created () {
-    api.get('/posts/')
-      .then(response => { this.posts = response.data })
-      .catch(error => this.$store.commit('error/throw', error))
+  beforeMount () {
+    this.fetch()
+  },
+  beforeUpdate () {
+    this.fetch()
   },
   data () {
     return {
       posts: []
+    }
+  },
+  methods: {
+    fetch () {
+      api.get('/posts/')
+        .then(response => { this.posts = response.data })
+        .catch(error => this.$store.commit('error/throw', error))
     }
   }
 }
