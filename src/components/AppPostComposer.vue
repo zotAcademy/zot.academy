@@ -42,7 +42,13 @@ export default {
       this.error = null
 
       api[ this.post.id ? 'patch' : 'post' ]('/posts/' + (this.post.id || ''), this.post)
-        .then(response => this.$router.push('/posts/' + response.data.id))
+        .then(response => {
+          if (this.$route.name === 'post') {
+            this.$root.$forceUpdate()
+            this.$store.commit('modal/hide')
+          }
+          this.$router.push('/posts/' + response.data.id)
+        })
         .catch(error => {
           this.error = error.response.data
           this.disabled = false

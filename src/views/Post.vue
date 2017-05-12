@@ -17,20 +17,22 @@ export default {
   components: {
     AppPost
   },
-  beforeRouteUpdate (to, from, next) {
-    api.get('/posts/' + to.params.id)
-      .then(response => { this.post = response.data })
-      .catch(error => this.$store.commit('error/throw', error))
-    next()
+  beforeMount () {
+    this.fetch()
   },
-  created () {
-    api.get('/posts/' + this.id)
-      .then(response => { this.post = response.data })
-      .catch(error => this.$store.commit('error/throw', error))
+  beforeUpdate () {
+    this.fetch()
   },
   data () {
     return {
       post: null
+    }
+  },
+  methods: {
+    fetch () {
+      api.get('/posts/' + this.id)
+        .then(response => { this.post = response.data })
+        .catch(error => this.$store.commit('error/throw', error))
     }
   }
 }
