@@ -17,10 +17,7 @@ export default {
   components: {
     AppPost
   },
-  beforeMount () {
-    this.fetch()
-  },
-  beforeUpdate () {
+  created () {
     this.fetch()
   },
   data () {
