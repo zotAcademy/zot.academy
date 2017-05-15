@@ -46,7 +46,7 @@ export default {
       return this.post.userId === this.$store.state.session.userId
     },
     deletable () {
-      return this.editable && (this.post.commentsCount != null ? this.post.commentsCount : this.post.comments.length) === 0
+      return this.editable && (this.post.comments_count != null ? this.post.comments_count : this.post.comments.length) === 0
     }
   },
   filters: {
