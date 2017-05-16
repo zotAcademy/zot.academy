@@ -8,8 +8,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import AppPost from '@/components/AppPost'
-import api from '@/api'
 
 export default {
   name: 'post',
@@ -18,18 +18,15 @@ export default {
     AppPost
   },
   created () {
-    this.fetch()
+    this.$store.dispatch('posts/get', this.id)
+      .catch(error => this.$store.commit('error/throw', error))
   },
-  data () {
-    return {
-      post: null
-    }
-  },
-  methods: {
-    fetch () {
-      api.get('/posts/' + this.id)
-        .then(response => { this.post = response.data })
-        .catch(error => this.$store.commit('error/throw', error))
+  computed: {
+    ...mapGetters({
+      getPostById: 'posts/getPostById'
+    }),
+    post () {
+      return this.getPostById(this.id)
     }
   }
 }

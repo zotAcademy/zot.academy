@@ -24,7 +24,6 @@
 import AppAlert from '@/components/AppAlert'
 import moment from 'moment'
 import octicons from 'octicons'
-import api from '@/api'
 
 export default {
   name: 'app-post',
@@ -60,7 +59,7 @@ export default {
       })
     },
     remove () {
-      api.delete('/posts/' + this.post.id)
+      this.$store.dispatch('posts/delete', this.post)
         .then(response => { this.$emit('remove') })
         .catch(error => { this.error = error.response.data })
     }

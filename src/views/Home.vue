@@ -11,8 +11,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import AppPost from '@/components/AppPost'
-import api from '@/api'
 
 export default {
   name: 'home',
@@ -20,19 +20,13 @@ export default {
     AppPost
   },
   created () {
-    this.fetch()
+    this.$store.dispatch('posts/get')
+      .catch(error => this.$store.commit('error/throw', error))
   },
-  data () {
-    return {
-      posts: []
-    }
-  },
-  methods: {
-    fetch () {
-      api.get('/posts/')
-        .then(response => { this.posts = response.data })
-        .catch(error => this.$store.commit('error/throw', error))
-    }
+  computed: {
+    ...mapGetters({
+      posts: 'posts/posts'
+    })
   }
 }
 </script>

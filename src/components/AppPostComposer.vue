@@ -12,7 +12,6 @@
 
 <script>
 import AppAlert from '@/components/AppAlert'
-import api from '@/api'
 
 export default {
   name: 'app-compose-post',
@@ -41,10 +40,9 @@ export default {
       this.disabled = true
       this.error = null
 
-      api[ this.post.id ? 'patch' : 'post' ]('/posts/' + (this.post.id || ''), this.post)
+      this.$store.dispatch('posts/' + (this.post.id ? 'patch' : 'post'), this.post)
         .then(response => {
-          if (this.$route.name === 'post') {
-            this.$root.$forceUpdate()
+          if (this.$store.state.modal.component === 'post-composer-modal') {
             this.$store.commit('modal/hide')
           }
           this.$router.push('/posts/' + response.data.id)
