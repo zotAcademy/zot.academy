@@ -81,13 +81,13 @@ export default {
   },
   computed: {
     username () {
-      return this.$store.state.session.user != null ? this.$store.state.session.user.username : null
+      return this.$store.state.session.user.username
     },
     loading () {
       return this.$store.state.requests.count > 0
     },
     isAuthenticated () {
-      return this.$store.state.session.user != null
+      return this.$store.state.session.user.id
     }
   },
   methods: {
