@@ -17,7 +17,7 @@ store.dispatch('session/restore').then(() => {
 })
 
 router.beforeEach((to, from, next) => {
-  if (!store.state.session.user) {
+  if (!(store.state.session.user && store.state.session.user.id)) {
     if (to.matched.some(record => record.meta.auth)) {
       return next({
         path: '/login'

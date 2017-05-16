@@ -3,14 +3,14 @@ import api from '@/api'
 export default {
   namespaced: true,
   state: {
-    user: {}
+    user: null
   },
   mutations: {
     establishment (state, session) {
       state.user = session.user
     },
     destruction (state) {
-      state.user = {}
+      state.user = null
     }
   },
   actions: {

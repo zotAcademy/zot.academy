@@ -42,7 +42,7 @@ export default {
       return '/posts/' + this.post.id
     },
     editable () {
-      return this.post.user_id === this.$store.state.session.user.id
+      return this.$store.state.session.user && this.post.user_id === this.$store.state.session.user.id
     },
     deletable () {
       return this.editable && (this.post.comments_count != null ? this.post.comments_count : this.post.comments.length) === 0

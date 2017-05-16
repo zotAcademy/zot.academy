@@ -87,7 +87,7 @@ export default {
       return this.$store.state.requests.count > 0
     },
     isAuthenticated () {
-      return this.$store.state.session.user.id
+      return this.$store.state.session.user && this.$store.state.session.user.id
     }
   },
   methods: {
