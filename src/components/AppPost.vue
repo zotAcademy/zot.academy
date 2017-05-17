@@ -8,8 +8,8 @@
         <p class="card-text"><small class="text-muted"><router-link class="text-muted" :to="'/' + post.user.username">@{{ post.user.username }}</router-link> posted {{ post.created_at | fromNow }}</small></p>
         <p class="card-text" v-html="post.html"></p>
 
-        <a :href="path" class="card-link" v-html="octicons.reply.toSVG()" v-if="$route.name === 'post'" @click.prevent></a>
-        <router-link class="card-link" v-html="octicons['comment-discussion'].toSVG()" :to="path" v-else></router-link>
+        <a :href="path" class="card-link" v-html="octicons['comment-discussion'].toSVG()" v-if="$route.name === 'post'" @click.prevent></a>
+        <router-link class="card-link" v-html="octicons.note.toSVG()" :to="path" v-else></router-link>
 
         <router-link class="card-link hidden-md-up" v-html="octicons.pencil.toSVG()" :to="path + '/edit'" v-if="editable"></router-link>
         <a :href="path + '/edit'" class="card-link hidden-sm-down" v-html="octicons.pencil.toSVG()" v-if="editable" @click.prevent="edit"></a>
