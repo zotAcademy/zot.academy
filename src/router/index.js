@@ -5,6 +5,7 @@ import Signup from '@/views/Signup'
 import Login from '@/views/Login'
 import NotFound from '@/views/NotFound'
 import NewPost from '@/views/NewPost'
+import EditPost from '@/views/EditPost'
 import Post from '@/views/Post'
 
 Vue.use(Router)
@@ -30,6 +31,14 @@ export default new Router({
     meta: {
       auth: true
     }
+  }, {
+    path: '/posts/:id/edit',
+    name: 'edit-post',
+    component: EditPost,
+    meta: {
+      auth: true
+    },
+    props: true
   }, {
     path: '/posts/:id',
     name: 'post',

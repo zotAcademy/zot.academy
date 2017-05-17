@@ -29,8 +29,14 @@ export default {
     }
   },
   mounted () {
-    if (this.$store.state.modal.payload) {
+    if (this.$store.state.modal.component === 'post-composer-modal' && this.$store.state.modal.payload) {
       this.post = Object.assign({}, this.$store.state.modal.payload)
+    } else if (this.$route.name === 'edit-post') {
+      this.$store.dispatch('posts/get', this.$route.params.id)
+        .then(response => {
+          this.post = response.data
+        })
+        .catch(error => this.$store.commit('error/throw', error))
     }
     this.$refs.textarea.focus()
   },
