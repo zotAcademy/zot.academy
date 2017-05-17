@@ -9,7 +9,7 @@
 
         <collapse-transition>
           <div class="collapse navbar-collapse show" id="navbarSupportedContent" v-show="navbar.expanded">
-            <ul class="navbar-nav mr-auto">
+            <ul class="navbar-nav mr-auto hidden-md-down">
               <li class="nav-item">
                 <router-link class="nav-link" to="/" active-class="active" exact>
                   <span v-html="octicons.home.toSVG()"></span> Home
