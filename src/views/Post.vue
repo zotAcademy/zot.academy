@@ -3,7 +3,7 @@
     <app-post
       v-if="post"
       :post="post"
-      @remove="$router.back()"></app-post>
+      @remove="$router.push('/')"></app-post>
   </div>
 </template>
 
