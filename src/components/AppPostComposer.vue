@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="submit">
+  <form @submit.prevent="submit" v-show="show">
     <app-alert v-if="error" class="alert-danger" :dismissible="true" @dismiss="error = null">
       {{ error.message }}
     </app-alert>
@@ -11,6 +11,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import AppAlert from '@/components/AppAlert'
 
 export default {
@@ -24,21 +25,38 @@ export default {
         id: null,
         text: ''
       },
+      show: true,
       disabled: false,
       error: null
     }
   },
-  mounted () {
+  created () {
     if (this.$store.state.modal.component === 'post-composer-modal' && this.$store.state.modal.payload) {
       this.post = Object.assign({}, this.$store.state.modal.payload)
     } else if (this.$route.name === 'edit-post') {
-      this.$store.dispatch('posts/get', this.$route.params.id)
-        .then(response => {
-          this.post = response.data
-        })
-        .catch(error => this.$store.commit('error/throw', error))
+      var id = +this.$route.params.id
+      var post = this.getPostById(id)
+
+      if (post != null) {
+        this.post = post
+      } else {
+        this.show = false
+        this.$store.dispatch('posts/get', id)
+          .then(response => {
+            this.post = response.data
+            this.show = true
+          })
+          .catch(error => this.$store.commit('error/throw', error))
+      }
     }
+  },
+  mounted () {
     this.$refs.textarea.focus()
+  },
+  computed: {
+    ...mapGetters({
+      getPostById: 'posts/getPostById'
+    })
   },
   methods: {
     submit () {
