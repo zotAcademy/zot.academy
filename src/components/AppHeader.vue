@@ -3,7 +3,7 @@
     <nav class="navbar navbar-light bg-faded fixed-top px-0">
       <div class="container d-flex flex-row">
         <a class="navbar-brand mr-auto mr-lg-3" href="#" @click.prevent>Zot Academy</a>
-        <ul class="navbar-nav d-flex flex-row mr-auto hidden-md-down">
+        <ul class="navbar-nav flex-row mr-auto hidden-md-down">
           <li class="nav-item">
             <router-link class="nav-link" to="/" active-class="active" exact>
               <span v-html="octicons.home.toSVG()"></span> Home
@@ -15,7 +15,7 @@
             </router-link>
           </li>
         </ul>
-        <ul class="navbar-nav d-flex flex-row">
+        <ul class="navbar-nav flex-row">
           <li class="nav-item hidden-md-down">
             <form class="navbar-nav form-inline">
               <input class="form-control" type="text" placeholder="Search">
@@ -36,7 +36,7 @@
               </div>
             </li>
             <li class="nav-item" v-else key="isUnauthenticated">
-              <router-link class="btn btn-outline-primary mr-2 hidden-md-down" to="/signin">Sign in</router-link>
+              <router-link class="btn btn-outline-primary hidden-md-down" to="/signin">Sign in</router-link>
               <router-link class="btn btn-outline-primary" to="/signup">Sign up</router-link>
             </li>
           </transition>
@@ -121,8 +121,8 @@ export default {
 .progress-bar {
   width: 100%;
 }
-.nav-item {
-  padding-left: 16px;
+.nav-item + .nav-item {
+  margin-left: .75em;
 }
 
 .slide-fade-enter-active {
