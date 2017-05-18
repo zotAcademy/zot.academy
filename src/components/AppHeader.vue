@@ -10,8 +10,8 @@
             </router-link>
           </li>
           <li class="nav-item" v-if="isAuthenticated">
-            <router-link class="nav-link" to="/notifications" active-class="active" exact>
-              <span v-html="octicons.bell.toSVG()"></span> Notifications
+            <router-link class="nav-link" to="/mentions" active-class="active" exact>
+              <span v-html="octicons.mention.toSVG()"></span> Mentions
             </router-link>
           </li>
         </ul>
