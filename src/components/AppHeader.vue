@@ -23,7 +23,7 @@
           </li>
           <transition name="slide-fade" mode="out-in">
             <li class="nav-item dropdown" :class="{show: dropdown.expanded}" v-if="isAuthenticated" key="isAuthenticated">
-              <a class="nav-link dropdown-toggle d-inline hidden-md-down mr-2" href="#" id="navbarDropdownMenuLink" aria-haspopup="true" :aria-expanded="dropdown.expanded" @click.prevent="dropdown.expanded = !dropdown.expanded" v-on-clickaway="closeDropdown">
+              <a class="nav-link dropdown-toggle d-inline hidden-md-down mr-2" href="#" aria-haspopup="true" :aria-expanded="dropdown.expanded" @click.prevent="dropdown.expanded = !dropdown.expanded" v-on-clickaway="closeDropdown">
                 @{{ username }}
               </a>
               <router-link class="btn btn-outline-primary py-1 px-2 hidden-md-up" to="/posts/new" v-html="octicons.comment.toSVG({height:28})"></router-link>
