@@ -4,7 +4,7 @@
       {{ error.message }}
     </app-alert>
     <div class="form-group">
-      <textarea class="form-control" rows="3" placeholder="What are you wondering?" ref="textarea" v-model="post.text"></textarea>
+      <textarea class="form-control" rows="5" placeholder="What are you wondering?" ref="textarea" v-model="post.text"></textarea>
     </div>
     <button type="submit" class="btn btn-primary float-right" :disabled="disabled">Post</button>
   </form>
