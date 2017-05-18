@@ -1,6 +1,6 @@
 <template>
   <div class="app-header">
-    <nav class="navbar navbar-light bg-faded fixed-top">
+    <nav class="navbar navbar-light bg-faded fixed-top px-0">
       <div class="container d-flex flex-row">
         <a class="navbar-brand mr-auto mr-lg-3" href="#" @click.prevent>Zot Academy</a>
         <ul class="navbar-nav d-flex flex-row mr-auto hidden-md-down">
@@ -122,8 +122,7 @@ export default {
   width: 100%;
 }
 .nav-item {
-  padding-right: 8px;
-  padding-left: 8px;
+  padding-left: 16px;
 }
 
 .slide-fade-enter-active {
