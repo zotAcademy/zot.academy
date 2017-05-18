@@ -2,7 +2,7 @@
   <div>
     <div class="card my-3">
       <div class="card-block">
-        <p class="card-text">Have an account? <router-link to="/login">Log in</router-link>.</p>
+        <p class="card-text">Have an account? <router-link to="/signin">Sign in</router-link>.</p>
       </div>
     </div>
     <app-alert v-if="error" class="alert-danger my-3" :dismissible="true" @dismiss="error = null">

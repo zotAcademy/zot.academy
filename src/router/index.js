@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/views/Home'
 import Signup from '@/views/Signup'
-import Login from '@/views/Login'
+import Signin from '@/views/Signin'
 import NotFound from '@/views/NotFound'
 import NewPost from '@/views/NewPost'
 import EditPost from '@/views/EditPost'
@@ -21,9 +21,9 @@ export default new Router({
     name: 'signup',
     component: Signup
   }, {
-    path: '/login',
-    name: 'login',
-    component: Login
+    path: '/signin',
+    name: 'signin',
+    component: Signin
   }, {
     path: '/posts/new',
     name: 'new-post',

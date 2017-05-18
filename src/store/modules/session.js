@@ -24,7 +24,7 @@ export default {
           .catch(resolve)
       })
     },
-    login ({ commit }, data) {
+    signin ({ commit }, data) {
       return new Promise((resolve, reject) => {
         api.post('/session', data)
           .then(response => {
@@ -34,7 +34,7 @@ export default {
           .catch(reject)
       })
     },
-    logout ({ commit }) {
+    signout ({ commit }) {
       return new Promise((resolve, reject) => {
         api.delete('/session')
           .then(response => {

@@ -1,16 +1,16 @@
 <template>
   <div class="container">
-    <app-login></app-login>
+    <app-signin></app-signin>
   </div>
 </template>
 
 <script>
-import AppLogin from '@/components/AppLogin'
+import AppSignin from '@/components/AppSignin'
 
 export default {
-  name: 'login',
+  name: 'signin',
   components: {
-    AppLogin
+    AppSignin
   }
 }
 </script>

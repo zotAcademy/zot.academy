@@ -46,6 +46,7 @@ export default {
 <style>
 body {
   padding-top: 3.5em;
+  padding-bottom: 3.5em;
 }
 .octicon {
   display: inline-block;

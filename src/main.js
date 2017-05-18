@@ -20,14 +20,14 @@ router.beforeEach((to, from, next) => {
   if (!(store.state.session.user && store.state.session.user.id)) {
     if (to.matched.some(record => record.meta.auth)) {
       return next({
-        path: '/login'
+        path: '/signin'
       })
     }
-    if ((to.name === 'login' && from.name !== 'signup') || (to.name === 'signup' && from.name !== 'login')) {
+    if ((to.name === 'signin' && from.name !== 'signup') || (to.name === 'signup' && from.name !== 'signin')) {
       store.dispatch('redirection/stash', from)
     }
   } else {
-    if (to.name === 'login' || to.name === 'signup') {
+    if (to.name === 'signin' || to.name === 'signup') {
       return next(from)
     }
   }
