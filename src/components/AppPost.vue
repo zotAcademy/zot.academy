@@ -1,5 +1,5 @@
 <template>
-  <div class="my-3">
+  <div class="app-post my-3">
     <app-alert v-if="error" class="alert-danger" :dismissible="true" @dismiss="error = null">
       {{ error.message }}
     </app-alert>
@@ -68,6 +68,9 @@ export default {
 </script>
 
 <style scoped>
+.app-post {
+  max-width: 590px;
+}
 .card-text {
   white-space: pre-wrap;
   word-break: break-word;

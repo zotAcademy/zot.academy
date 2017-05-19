@@ -14,19 +14,19 @@
             <small>Search</small>
           </router-link>
         </li>
-        <li class="nav-item col" v-if="isAuthenticated">
+        <li class="nav-item col" v-if="authenticated">
           <router-link class="nav-link" to="/mentions" active-class="active" exact>
             <span v-html="octicons.mention.toSVG()"></span>
             <small>Mentions</small>
           </router-link>
         </li>
-        <li class="nav-item col" v-if="isAuthenticated">
+        <li class="nav-item col" v-if="authenticated">
           <router-link class="nav-link" :to="'/' + username" active-class="active" exact>
             <span v-html="octicons.person.toSVG()"></span>
             <small>Profile</small>
           </router-link>
         </li>
-        <li class="nav-item col" v-if="!isAuthenticated">
+        <li class="nav-item col" v-if="!authenticated">
           <router-link class="nav-link" to="/signin" active-class="active" exact>
             <span v-html="octicons['sign-in'].toSVG()"></span>
             <small>Sign in</small>
@@ -38,6 +38,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import octicons from 'octicons'
 
 export default {
@@ -48,12 +49,10 @@ export default {
     }
   },
   computed: {
-    username () {
-      return this.$store.state.session.user.username
-    },
-    isAuthenticated () {
-      return this.$store.state.session.user && this.$store.state.session.user.id
-    }
+    ...mapGetters({
+      authenticated: 'session/authenticated',
+      username: 'session/username'
+    })
   }
 }
 </script>

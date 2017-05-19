@@ -13,6 +13,14 @@ export default {
       state.user = null
     }
   },
+  getters: {
+    authenticated (state) {
+      return state.user != null && state.user.id
+    },
+    username (state) {
+      return state.user != null ? state.user.username : null
+    }
+  },
   actions: {
     restore ({ commit }) {
       return new Promise((resolve, reject) => {

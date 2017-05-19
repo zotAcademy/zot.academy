@@ -9,7 +9,7 @@
               <span v-html="octicons.home.toSVG()"></span> Home
             </router-link>
           </li>
-          <li class="nav-item" v-if="isAuthenticated">
+          <li class="nav-item" v-if="authenticated">
             <router-link class="nav-link" to="/mentions" active-class="active" exact>
               <span v-html="octicons.mention.toSVG()"></span> Mentions
             </router-link>
@@ -22,7 +22,7 @@
             </form>
           </li>
           <transition name="slide-fade" mode="out-in">
-            <li class="nav-item dropdown" :class="{show: dropdown.expanded}" v-if="isAuthenticated" key="isAuthenticated">
+            <li class="nav-item dropdown" :class="{show: dropdown.expanded}" v-if="authenticated" key="isAuthenticated">
               <a class="nav-link dropdown-toggle d-inline hidden-md-down mr-2" href="#" aria-haspopup="true" :aria-expanded="dropdown.expanded" @click.prevent="dropdown.expanded = !dropdown.expanded" v-on-clickaway="closeDropdown">
                 @{{ username }}
               </a>
@@ -50,6 +50,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import octicons from 'octicons'
 import CollapseTransition from '../transitions/Collapse'
 import { mixin as clickaway } from 'vue-clickaway'
@@ -77,15 +78,11 @@ export default {
     }
   },
   computed: {
-    username () {
-      return this.$store.state.session.user.username
-    },
-    loading () {
-      return this.$store.state.requests.count > 0
-    },
-    isAuthenticated () {
-      return this.$store.state.session.user && this.$store.state.session.user.id
-    }
+    ...mapGetters({
+      loading: 'requests/loading',
+      authenticated: 'session/authenticated',
+      username: 'session/username'
+    })
   },
   methods: {
     compose () {

@@ -11,6 +11,11 @@ export default {
       state.count--
     }
   },
+  getters: {
+    loading (state) {
+      return state.count > 0
+    }
+  },
   actions: {
     increment ({ commit }) {
       commit('increment')

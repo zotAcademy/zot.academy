@@ -54,6 +54,6 @@ body {
   fill: currentColor;
 }
 .container {
-  max-width: 590px;
+  max-width: 760px;
 }
 </style>
