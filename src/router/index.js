@@ -69,7 +69,9 @@ export default new Router({
     path: '/settings',
     name: 'settings',
     component: Settings,
-    props: true
+    meta: {
+      auth: true
+    }
   }, {
     path: '/:username',
     name: 'profile',
