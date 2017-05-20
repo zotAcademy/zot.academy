@@ -33,4 +33,7 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  max-width: 590px;
+}
 </style>
