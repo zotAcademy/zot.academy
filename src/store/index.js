@@ -6,6 +6,7 @@ import session from './modules/session'
 import redirection from './modules/redirection'
 import error from './modules/error'
 import modal from './modules/modal'
+import cache from './modules/cache'
 import posts from './modules/posts'
 
 Vue.use(Vuex)
@@ -18,6 +19,7 @@ export default new Vuex.Store({
     redirection,
     error,
     modal,
+    cache,
     posts
   },
   strict: true
