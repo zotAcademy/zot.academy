@@ -55,8 +55,12 @@ export default {
       this.$store.dispatch('session/signup', this.credential)
         .then(() => {
           this.$store.dispatch('redirection/pop')
-            .then(to => this.$router.push(to))
-            .catch(() => this.$router.push('/'))
+            .then(to => {
+              this.$router.push(to.fullPath)
+            })
+            .catch(() => {
+              this.$router.push('/')
+            })
         })
         .catch(error => {
           this.error = error.response.data
