@@ -14,6 +14,8 @@ import Post from '@/views/Post'
 
 import Mentions from '@/views/Mentions'
 
+import About from '@/views/About'
+
 import Profile from '@/views/Profile'
 
 import NotFound from '@/views/NotFound'
@@ -73,6 +75,10 @@ export default new Router({
     meta: {
       auth: true
     }
+  }, {
+    path: '/about',
+    name: 'about',
+    component: About
   }, {
     path: '/:username',
     name: 'profile',
