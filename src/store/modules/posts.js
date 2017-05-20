@@ -34,7 +34,7 @@ export default {
     posts (state) {
       return state.ids.map(id => state.cache[id])
     },
-    getPostById (state, getters) {
+    getPostById (state) {
       return (id) => state.cache[id]
     }
   },

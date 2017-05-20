@@ -8,22 +8,22 @@
         <p class="card-text"><small class="text-muted"><router-link class="text-muted" :to="'/' + post.user.username">@{{ post.user.username }}</router-link> posted {{ post.created_at | fromNow }}</small></p>
         <p class="card-text" v-html="post.html"></p>
 
-        <a :href="path" class="card-link" v-html="octicons['comment-discussion'].toSVG()" v-if="$route.name === 'post'" @click.prevent></a>
-        <router-link class="card-link" v-html="octicons.note.toSVG()" :to="path" v-else></router-link>
+        <a :href="path" class="card-link" v-html="comment_discussion()" v-if="$route.name === 'post'" @click.prevent></a>
+        <router-link class="card-link" v-html="note()" :to="path" v-else></router-link>
 
-        <router-link class="card-link hidden-md-up" v-html="octicons.pencil.toSVG()" :to="path + '/edit'" v-if="editable"></router-link>
-        <a :href="path + '/edit'" class="card-link hidden-sm-down" v-html="octicons.pencil.toSVG()" v-if="editable" @click.prevent="edit"></a>
+        <router-link class="card-link hidden-md-up" v-html="pencil()" :to="path + '/edit'" v-if="editable"></router-link>
+        <a :href="path + '/edit'" class="card-link hidden-sm-down" v-html="pencil()" v-if="editable" @click.prevent="edit"></a>
 
-        <a :href="path" class="card-link" v-html="octicons.trashcan.toSVG()" v-if="deletable" @click.prevent="remove"></a>
+        <a :href="path" class="card-link" v-html="trashcan()" v-if="deletable" @click.prevent="remove"></a>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import AppAlert from '@/components/AppAlert'
 import moment from 'moment'
-import octicons from 'octicons'
 
 export default {
   name: 'app-post',
@@ -33,11 +33,16 @@ export default {
   },
   data () {
     return {
-      octicons,
       error: null
     }
   },
   computed: {
+    ...mapGetters({
+      comment_discussion: 'octicons/comment-discussion',
+      note: 'octicons/note',
+      pencil: 'octicons/pencil',
+      trashcan: 'octicons/trashcan'
+    }),
     path () {
       return '/posts/' + this.post.id
     },

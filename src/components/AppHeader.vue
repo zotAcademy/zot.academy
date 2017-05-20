@@ -6,12 +6,12 @@
         <ul class="navbar-nav flex-row mr-auto hidden-md-down">
           <li class="nav-item">
             <router-link class="nav-link" to="/" active-class="active" exact>
-              <span v-html="octicons.home.toSVG()"></span> Home
+              <span v-html="home()"></span> Home
             </router-link>
           </li>
           <li class="nav-item" v-if="authenticated">
             <router-link class="nav-link" to="/mentions" active-class="active" exact>
-              <span v-html="octicons.mention.toSVG()"></span> Mentions
+              <span v-html="mention()"></span> Mentions
             </router-link>
           </li>
         </ul>
@@ -26,8 +26,8 @@
               <a class="nav-link dropdown-toggle d-inline hidden-md-down mr-2" href="#" aria-haspopup="true" :aria-expanded="dropdown.expanded" @click.prevent="dropdown.expanded = !dropdown.expanded" v-on-clickaway="closeDropdown">
                 @{{ username }}
               </a>
-              <router-link class="btn btn-outline-primary py-1 px-2 hidden-md-up" to="/posts/new" v-html="octicons.comment.toSVG({height:28})"></router-link>
-              <a class="btn btn-outline-primary py-1 px-2 hidden-sm-down" href="/posts/new" v-html="octicons.comment.toSVG({height:28})" @click.prevent="compose"></a>
+              <router-link class="btn btn-outline-primary py-1 px-2 hidden-md-up" to="/posts/new" v-html="comment({height:28})"></router-link>
+              <a class="btn btn-outline-primary py-1 px-2 hidden-sm-down" href="/posts/new" v-html="comment({height:28})" @click.prevent="compose"></a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                 <router-link class="dropdown-item" :to="'/' + username">View profile</router-link>
                 <div class="dropdown-divider"></div>
@@ -51,7 +51,6 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import octicons from 'octicons'
 import CollapseTransition from '../transitions/Collapse'
 import { mixin as clickaway } from 'vue-clickaway'
 
@@ -63,7 +62,6 @@ export default {
   },
   data () {
     return {
-      octicons,
       navbar: {
         expanded: false
       },
@@ -79,6 +77,9 @@ export default {
   },
   computed: {
     ...mapGetters({
+      home: 'octicons/home',
+      mention: 'octicons/mention',
+      comment: 'octicons/comment',
       loading: 'requests/loading',
       authenticated: 'session/authenticated',
       username: 'session/username'
