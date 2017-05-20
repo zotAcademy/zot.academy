@@ -6,7 +6,7 @@
     <div class="card">
       <div class="card-block">
         <p class="card-text"><small class="text-muted"><router-link class="text-muted" :to="'/' + post.user.username">@{{ post.user.username }}</router-link> posted {{ post.created_at | fromNow }}</small></p>
-        <p class="card-text" v-html="post.html"></p>
+        <p ref="html" class="card-text" v-html="post.html"></p>
 
         <a :href="path" class="card-link" v-html="comment_discussion()" v-if="$route.name === 'post'" @click.prevent></a>
         <router-link class="card-link" v-html="note()" :to="path" v-else></router-link>
@@ -30,6 +30,12 @@ export default {
   props: ['post'],
   components: {
     AppAlert
+  },
+  mounted () {
+    this.routerify(this.$refs.html)
+  },
+  updated () {
+    this.routerify(this.$refs.html)
   },
   data () {
     return {
@@ -57,6 +63,16 @@ export default {
     fromNow: date => moment(date).fromNow()
   },
   methods: {
+    routerify (el) {
+      [].slice.call(el.getElementsByTagName('a')).forEach(a => {
+        if (a.host === document.location.host) {
+          a.onclick = event => {
+            event.preventDefault()
+            this.$router.push(a.pathname + a.search + a.hash)
+          }
+        }
+      })
+    },
     edit () {
       this.$store.commit('modal/show', {
         component: 'post-composer-modal',
