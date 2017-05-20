@@ -33,8 +33,9 @@ export default {
           var data = state[pluralify(model)][id]
 
           if (data != null) {
-            var include = models[model]
+            data = Object.assign({}, data)
 
+            var include = models[model]
             if (include != null) {
               Object.keys(include).forEach(key => {
                 var submodel = include[key]
