@@ -14,8 +14,15 @@ const isPlural = str => /s$/.test(str)
 export default {
   namespaced: true,
   state: {
-    posts: {},
-    users: {}
+    ...(() => {
+      var state = {}
+
+      Object.keys(models).forEach(model => {
+        state[pluralify(model)] = {}
+      })
+
+      return state
+    })()
   },
   getters: {
     ...(() => {
