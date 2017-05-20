@@ -4,6 +4,8 @@
     <h1 class="display-4" v-else>{{ statusText }}</h1>
     <p class="lead">{{ message }}</p>
     <hr>
+    <router-link to="/" class="btn btn-outline-primary" v-if="status">Home</router-link>
+    <a :href="$route.path" class="btn btn-outline-primary" v-else>Retry</a>
   </div>
 </template>
 
