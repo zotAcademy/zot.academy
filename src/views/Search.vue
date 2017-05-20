@@ -1,6 +1,6 @@
 <template>
   <div class="container my-3">
-    <h1>Search</h1>
+    <h3>{{ query }}</h3>
   </div>
 </template>
 
@@ -12,6 +12,9 @@ export default {
   created () {
   },
   computed: {
+    query () {
+      return this.$route.query.q
+    }
   }
 }
 </script>

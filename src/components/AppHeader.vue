@@ -17,8 +17,8 @@
         </ul>
         <ul class="navbar-nav flex-row">
           <li class="nav-item hidden-md-down">
-            <form class="navbar-nav form-inline">
-              <input class="form-control" type="text" placeholder="Search">
+            <form class="navbar-nav form-inline" @submit.prevent="$router.push({path: '/search', query: {q: search}})">
+              <input class="form-control" type="text" placeholder="Search" v-model="search">
             </form>
           </li>
           <transition name="slide-fade" mode="out-in">
@@ -60,8 +60,14 @@ export default {
   components: {
     CollapseTransition
   },
+  created () {
+    if (this.$route.name === 'search') {
+      this.search = this.$route.query.q
+    }
+  },
   data () {
     return {
+      search: '',
       navbar: {
         expanded: false
       },
@@ -72,6 +78,7 @@ export default {
   },
   watch: {
     '$route' () {
+      this.search = this.$route.name === 'search' ? this.$route.query.q : ''
       this.navbar.expanded = this.dropdown.expanded = false
     }
   },
