@@ -7,7 +7,7 @@ import NotFound from '@/views/NotFound'
 import NewPost from '@/views/NewPost'
 import EditPost from '@/views/EditPost'
 import Post from '@/views/Post'
-
+import About from '@/views/About'
 Vue.use(Router)
 
 export default new Router({
@@ -20,6 +20,10 @@ export default new Router({
     path: '/signup',
     name: 'signup',
     component: Signup
+  }, {
+    path: '/about',
+    name: 'about',
+    component: About
   }, {
     path: '/login',
     name: 'login',
