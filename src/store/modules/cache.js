@@ -30,21 +30,24 @@ export default {
 
       Object.keys(models).forEach(model => {
         getters[model] = (state, getters) => (id) => {
-          var data = Object.assign({}, state[pluralify(model)][id])
-          var include = models[model]
+          var data = state[pluralify(model)][id]
 
-          if (include != null) {
-            Object.keys(include).forEach(key => {
-              var submodel = include[key]
+          if (data != null) {
+            var include = models[model]
 
-              if (data[key] != null) {
-                if (isPlural(key)) {
-                  data[key] = data[key].map(entry => getters[submodel](entry.id))
-                } else {
-                  data[key] = getters[submodel](data[key].id)
+            if (include != null) {
+              Object.keys(include).forEach(key => {
+                var submodel = include[key]
+
+                if (data[key] != null) {
+                  if (isPlural(key)) {
+                    data[key] = data[key].map(entry => getters[submodel](entry.id))
+                  } else {
+                    data[key] = getters[submodel](data[key].id)
+                  }
                 }
-              }
-            })
+              })
+            }
           }
 
           return data
