@@ -29,7 +29,12 @@ export default {
             commit('establishment', response.data)
             resolve(response)
           })
-          .catch(resolve)
+          .catch(error => {
+            resolve(error.response)
+            if (error.response.status == null) {
+              reject(error)
+            }
+          })
       })
     },
     signin ({ commit }, data) {

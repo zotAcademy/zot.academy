@@ -6,15 +6,17 @@ import { sync } from 'vuex-router-sync'
 
 sync(store, router)
 
-store.dispatch('session/restore').then(() => {
-  /* eslint-disable no-new */
-  new Vue({
-    el: '#app',
-    router,
-    store,
-    render: h => h(App)
+store.dispatch('session/restore')
+  .then((response) => {
+    /* eslint-disable no-new */
+    new Vue({
+      el: '#app',
+      router,
+      store,
+      render: h => h(App)
+    })
   })
-})
+  .catch(error => store.commit('error/throw', error))
 
 router.beforeEach((to, from, next) => {
   if (!(store.state.session.user && store.state.session.user.id)) {
