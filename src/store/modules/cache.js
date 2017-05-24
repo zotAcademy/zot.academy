@@ -3,6 +3,7 @@ import Vue from 'vue'
 const models = {
   post: {
     user: 'user',
+    in_reply_to_post: 'post',
     replies: 'post'
   },
   user: {}
@@ -30,6 +31,8 @@ export default {
 
       Object.keys(models).forEach(model => {
         getters[model] = (state, getters) => (id) => {
+          if (id == null) return
+
           var data = state[pluralify(model)][id]
 
           if (data != null) {
