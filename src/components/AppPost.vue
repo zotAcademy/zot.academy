@@ -52,7 +52,7 @@ export default {
       return this.$store.state.session.user && this.post.user_id === this.$store.state.session.user.id
     },
     deletable () {
-      return this.editable && (this.post.comments_count != null ? this.post.comments_count : this.post.comments.length) === 0
+      return this.editable
     }
   },
   filters: {
