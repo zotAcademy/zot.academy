@@ -30,7 +30,7 @@ export default {
       var getters = {}
 
       Object.keys(models).forEach(model => {
-        getters[model] = (state, getters) => (id) => {
+        getters[model] = (state, getters) => (id, exclude) => {
           if (id == null) return
 
           var data = state[pluralify(model)][id]
@@ -39,15 +39,15 @@ export default {
             data = Object.assign({}, data)
 
             var include = models[model]
-            if (include != null) {
+            if (include != null && !exclude) {
               Object.keys(include).forEach(key => {
-                var submodel = include[key]
+                var association = include[key]
 
                 if (data[key] != null) {
                   if (isPlural(key)) {
-                    data[key] = data[key].map(entry => getters[submodel](entry.id))
+                    data[key] = data[key].map(entry => getters[association](entry.id, true))
                   } else {
-                    data[key] = getters[submodel](data[key].id)
+                    data[key] = getters[association](data[key].id, true)
                   }
                 }
               })
@@ -87,10 +87,10 @@ export default {
 
           if (include != null) {
             Object.keys(include).forEach(key => {
-              var submodel = include[key]
+              var association = include[key]
 
               if (data[key] != null) {
-                dispatch((isPlural(key) ? pluralify(submodel) : submodel), data[key])
+                dispatch((isPlural(key) ? pluralify(association) : association), data[key])
 
                 if (isPlural(key)) {
                   data[key] = data[key].map(entry => {
