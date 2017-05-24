@@ -3,8 +3,7 @@ import Vue from 'vue'
 const models = {
   post: {
     user: 'user',
-    in_reply_to_post: 'post',
-    replies: 'post'
+    in_reply_to_post: 'post'
   },
   user: {}
 }
@@ -30,7 +29,7 @@ export default {
       var getters = {}
 
       Object.keys(models).forEach(model => {
-        getters[model] = (state, getters) => (id, exclude) => {
+        getters[model] = (state, getters) => (id) => {
           if (id == null) return
 
           var data = state[pluralify(model)][id]
@@ -39,15 +38,15 @@ export default {
             data = Object.assign({}, data)
 
             var include = models[model]
-            if (include != null && !exclude) {
+            if (include != null) {
               Object.keys(include).forEach(key => {
                 var association = include[key]
 
                 if (data[key] != null) {
                   if (isPlural(key)) {
-                    data[key] = data[key].map(entry => getters[association](entry.id, true))
+                    data[key] = data[key].map(entry => getters[association](entry.id))
                   } else {
-                    data[key] = getters[association](data[key].id, true)
+                    data[key] = getters[association](data[key].id)
                   }
                 }
               })
