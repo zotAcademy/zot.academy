@@ -19,7 +19,7 @@ store.dispatch('session/restore')
   .catch(error => store.commit('error/throw', error))
 
 router.beforeEach((to, from, next) => {
-  if (!(store.state.session.user && store.state.session.user.id)) {
+  if (!(store.getters['session/authenticated'])) {
     if (to.matched.some(record => record.meta.auth)) {
       store.dispatch('redirection/stash', to)
       return next({

@@ -49,7 +49,7 @@ export default {
       return '/posts/' + this.post.id
     },
     editable () {
-      return this.$store.state.session.user && this.post.user_id === this.$store.state.session.user.id
+      return this.post.user_id === this.$store.state.session.user_id
     },
     deletable () {
       return this.editable

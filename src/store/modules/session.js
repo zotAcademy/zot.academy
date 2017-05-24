@@ -3,29 +3,31 @@ import api from '@/api'
 export default {
   namespaced: true,
   state: {
-    user: null
+    user_id: null
   },
   mutations: {
     establishment (state, session) {
-      state.user = session.user
+      state.user_id = session.user.id
     },
     destruction (state) {
-      state.user = null
+      state.user_id = null
     }
   },
   getters: {
     authenticated (state) {
-      return state.user != null && state.user.id
+      return state.user_id != null
     },
-    username (state) {
-      return state.user != null ? state.user.username : null
+    username (state, getters, rootState, rootGetters) {
+      var user = rootGetters['cache/user'](state.user_id)
+      return user != null ? user.username : null
     }
   },
   actions: {
-    restore ({ commit }) {
+    restore ({ commit, dispatch }) {
       return new Promise((resolve, reject) => {
         api.get('/session')
           .then(response => {
+            dispatch('cache/user', response.data.user, { root: true })
             commit('establishment', response.data)
             resolve(response)
           })
@@ -37,10 +39,11 @@ export default {
           })
       })
     },
-    signin ({ commit }, data) {
+    signin ({ commit, dispatch }, data) {
       return new Promise((resolve, reject) => {
         api.post('/session', data)
           .then(response => {
+            dispatch('cache/user', response.data.user, { root: true })
             commit('establishment', response.data)
             resolve(response)
           })
@@ -57,12 +60,13 @@ export default {
           .catch(reject)
       })
     },
-    signup ({ commit }, data) {
+    signup ({ commit, dispatch }, data) {
       return new Promise((resolve, reject) => {
         api.post('/users/', data)
           .then(response => {
             api.post('/session', data)
               .then(response => {
+                dispatch('cache/user', response.data.user, { root: true })
                 commit('establishment', response.data)
                 resolve(response)
               })
