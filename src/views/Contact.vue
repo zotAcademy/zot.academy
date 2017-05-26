@@ -1,10 +1,7 @@
 <template>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-sm-2">
-
-      </div>
-      <div class="col-sm-4 side-form">
+      <div class="col col-12 col-md-6 side-form">
         <p class = "title">Get in Touch </p>
         <p class="lead message">We'd love to hear from you! </p>
         <form class="border">
@@ -23,7 +20,7 @@
           <button type="button" class="btn btn-secondary btn-lg btn-block">Send</button>
         </form>
       </div>
-      <div class="col-sm-4 side-desc">
+      <div class="col col-12 col-md-6  side-desc">
         <p class="lead description"> Please feel free to shoot us a message if you have any questions
           or comments, or just want to <strong> get in touch!</strong> Also feel free check out our individual
           LinkedIn pages by clicking on our pictures in the <strong>About page.</strong>
