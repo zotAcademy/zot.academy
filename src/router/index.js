@@ -8,6 +8,7 @@ import NewPost from '@/views/NewPost'
 import EditPost from '@/views/EditPost'
 import Post from '@/views/Post'
 import About from '@/views/About'
+import Contact from '@/views/Contact'
 Vue.use(Router)
 
 export default new Router({
@@ -24,6 +25,10 @@ export default new Router({
     path: '/about',
     name: 'about',
     component: About
+  }, {
+    path: '/contact',
+    name: 'contact',
+    component: Contact
   }, {
     path: '/login',
     name: 'login',
