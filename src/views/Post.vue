@@ -4,13 +4,6 @@
       v-if="post"
       :post="post"
       @remove="$router.push('/')"></app-post>
-    <transition-group class="posts" name="slide-fade" tag="div" v-if="post">
-      <app-post class="post reply ml-3 ml-md-5"
-        v-for="(post, index) in post.replies"
-        :key="post.id"
-        :post="post"
-        @remove="post.replies.splice(index, 1)"></app-post>
-    </transition-group>
   </div>
 </template>
 
@@ -42,12 +35,5 @@ export default {
 <style scoped>
 .container {
   max-width: 590px;
-}
-.slide-fade-leave-to {
-  opacity: 0;
-}
-.slide-fade-leave-active {
-  position: absolute;
-  width: 100%;
 }
 </style>

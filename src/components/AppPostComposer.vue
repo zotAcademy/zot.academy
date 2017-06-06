@@ -69,9 +69,7 @@ export default {
           if (this.$store.state.modal.component === 'post-composer-modal') {
             this.$store.commit('modal/hide')
           }
-          if (this.$route.name !== 'post') {
-            this.$router.push('/posts/' + response.data.id)
-          }
+          this.$router.push('/posts/' + response.data.id)
         })
         .catch(error => {
           this.error = error.response.data
