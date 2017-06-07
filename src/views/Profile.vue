@@ -49,7 +49,7 @@ export default {
   },
   methods: {
     fetch (username) {
-      this.$store.dispatch('timelines/get', '/users/' + this.username + '/posts/')
+      this.$store.dispatch('timelines/get', '/users/' + username + '/posts/')
         .then(() => { this.show = true })
         .catch(error => this.$store.commit('error/throw', error))
     },
