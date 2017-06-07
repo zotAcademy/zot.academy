@@ -31,7 +31,6 @@
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                 <router-link class="dropdown-item" :to="'/' + username">View profile</router-link>
                 <div class="dropdown-divider"></div>
-                <router-link class="dropdown-item" to="/settings">Settings</router-link>
                 <a class="dropdown-item" :href="$route.path" @click.prevent="signout">Sign out</a>
               </div>
             </li>
