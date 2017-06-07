@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import AppPostComposer from '@/components/AppPostComposer'
 
 export default {
@@ -21,8 +22,17 @@ export default {
     AppPostComposer
   },
   computed: {
+    ...mapGetters({
+      getPostById: 'posts/getPostById'
+    }),
     title () {
-      return this.$store.state.modal.payload ? 'Edit this Post' : 'Compose new Post'
+      if (this.$store.state.modal.payload) {
+        if (this.$store.state.modal.payload.in_reply_to_post_id && this.$store.state.modal.payload.id == null) {
+          return 'Reply to @' + this.getPostById(this.$store.state.modal.payload.in_reply_to_post_id).user.username
+        }
+        return 'Edit this Post'
+      }
+      return 'Compose new Post'
     }
   },
   methods: {

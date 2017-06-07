@@ -15,7 +15,7 @@ import { mapGetters } from 'vuex'
 import AppAlert from '@/components/AppAlert'
 
 export default {
-  name: 'app-compose-post',
+  name: 'app-post-composer',
   components: {
     AppAlert
   },
@@ -51,7 +51,19 @@ export default {
     }
   },
   mounted () {
-    this.$refs.textarea.focus()
+    var textarea = this.$refs.textarea
+    var length = textarea.value.length
+
+    if (textarea.setSelectionRange) {
+      textarea.focus()
+      textarea.setSelectionRange(length, length)
+    } else if (textarea.createTextRange) {
+      var range = textarea.createTextRange()
+      range.collapse(true)
+      range.moveEnd('character', length)
+      range.moveStart('character', length)
+      range.select()
+    }
   },
   computed: {
     ...mapGetters({
@@ -69,7 +81,11 @@ export default {
           if (this.$store.state.modal.component === 'post-composer-modal') {
             this.$store.commit('modal/hide')
           }
-          this.$router.push('/posts/' + response.data.id)
+          if (response.data.in_reply_to_post_id) {
+            this.$router.push('/posts/' + response.data.in_reply_to_post_id)
+          } else {
+            this.$router.push('/posts/' + response.data.id)
+          }
         })
         .catch(error => {
           this.error = error.response.data

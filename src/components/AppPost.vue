@@ -8,8 +8,8 @@
         <p class="card-text"><small class="text-muted"><router-link class="text-muted" :to="'/' + post.user.username">@{{ post.user.username }}</router-link> posted {{ post.created_at | fromNow }}</small></p>
         <p class="card-text" v-html="post.html" v-routerify></p>
 
-        <a :href="path" class="card-link" v-html="comment_discussion()" v-if="$route.name === 'post'" @click.prevent></a>
-        <router-link class="card-link" v-html="note()" :to="path" v-else></router-link>
+        <router-link class="card-link" v-html="comment_discussion()" :to="path" active-class="active"></router-link>
+        <a :href="path" class="card-link" v-html="reply()" @click.prevent="composeReply"></a>
 
         <router-link class="card-link hidden-md-up" v-html="pencil()" :to="path + '/edit'" v-if="editable"></router-link>
         <a :href="path + '/edit'" class="card-link hidden-sm-down" v-html="pencil()" v-if="editable" @click.prevent="edit"></a>
@@ -40,8 +40,8 @@ export default {
   },
   computed: {
     ...mapGetters({
+      reply: 'octicons/reply',
       comment_discussion: 'octicons/comment-discussion',
-      note: 'octicons/note',
       pencil: 'octicons/pencil',
       trashcan: 'octicons/trashcan'
     }),
@@ -63,6 +63,15 @@ export default {
       this.$store.commit('modal/show', {
         component: 'post-composer-modal',
         payload: this.post
+      })
+    },
+    composeReply () {
+      this.$store.commit('modal/show', {
+        component: 'post-composer-modal',
+        payload: {
+          in_reply_to_post_id: this.post.id,
+          text: '@' + this.post.user.username + ' '
+        }
       })
     },
     remove () {

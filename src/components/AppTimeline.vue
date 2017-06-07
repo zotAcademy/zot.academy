@@ -2,7 +2,7 @@
   <div>
     <div class="card my-3" v-if="posts == null || posts.length === 0">
       <div class=card-block>
-        <h1 class="display-4">No Post Yet</h1>
+        <h1 class="display-4">{{ title }}</h1>
         <p class="lead">Please stay tuned.</p>
       </div>
     </div>
@@ -23,6 +23,15 @@ export default {
   props: ['posts'],
   components: {
     AppPost
+  },
+  computed: {
+    title () {
+      if (this.$route.name === 'post') {
+        return 'No Reply Yet'
+      } else {
+        return 'No Post Yet'
+      }
+    }
   }
 }
 </script>
