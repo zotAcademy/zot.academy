@@ -28,9 +28,12 @@ export default {
     }
   },
   created () {
-    this.$store.dispatch('timelines/get', this.timeline)
-      .then(() => { this.show = true })
-      .catch(error => this.$store.commit('error/throw', error))
+    this.fetch(this.username)
+  },
+  beforeRouteUpdate (to, from, next) {
+    this.show = false
+    next()
+    this.fetch(to.params.username)
   },
   computed: {
     ...mapGetters({
@@ -45,6 +48,11 @@ export default {
     }
   },
   methods: {
+    fetch (username) {
+      this.$store.dispatch('timelines/get', '/users/' + this.username + '/posts/')
+        .then(() => { this.show = true })
+        .catch(error => this.$store.commit('error/throw', error))
+    },
     signout () {
       this.$store.dispatch('session/signout')
         .catch(() => {})
