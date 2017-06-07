@@ -8,7 +8,7 @@
         <span v-html="sign_out()"></span> <span class="hidden-xs-down">Sign out</span>
       </a>
     </div>
-    <div v-if="show">
+    <div v-if="show || this.getPosts(this.timeline).length > 0">
       <h1>@{{ username }}</h1>
       <app-timeline :posts="getPosts(timeline)"></app-timeline>
     </div>

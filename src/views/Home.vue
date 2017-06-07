@@ -1,6 +1,8 @@
 <template>
-  <div class="container">
-    <app-timeline :posts="getPosts(timeline)"></app-timeline>
+  <div class="container my-3">
+    <div v-if="show || this.getPosts(this.timeline).length > 0">
+      <app-timeline :posts="getPosts(timeline)"></app-timeline>
+    </div>
   </div>
 </template>
 
@@ -15,11 +17,13 @@ export default {
   },
   data () {
     return {
+      show: false,
       timeline: '/posts/'
     }
   },
   created () {
     this.$store.dispatch('timelines/get', this.timeline)
+      .then(() => { this.show = true })
       .catch(error => this.$store.commit('error/throw', error))
   },
   computed: {
