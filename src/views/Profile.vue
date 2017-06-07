@@ -1,9 +1,6 @@
 <template>
   <div class="container my-3">
     <div class="hidden-lg-up float-right" v-if="username === sessionUsername">
-      <router-link to="/settings" class="btn btn-secondary btn-sm">
-        <span v-html="gear()"></span> <span class="hidden-xs-down">Settings</span>
-      </router-link>
       <a :href="$route.path" class="btn btn-secondary btn-sm" @click.prevent="signout">
         <span v-html="sign_out()"></span> <span class="hidden-xs-down">Sign out</span>
       </a>
