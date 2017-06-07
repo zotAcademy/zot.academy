@@ -1,6 +1,6 @@
 <template>
   <div class="container my-3">
-    <div v-if="show || this.getPosts(this.timeline).length > 0">
+    <div v-if="show || getPosts(timeline).length > 0">
       <h1>Mentions</h1>
       <app-timeline :posts="getPosts(timeline)"></app-timeline>
     </div>
@@ -18,8 +18,7 @@ export default {
   },
   data () {
     return {
-      show: false,
-      timeline: '/posts/'
+      show: false
     }
   },
   created () {
