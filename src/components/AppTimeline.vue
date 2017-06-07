@@ -19,7 +19,7 @@
 import AppPost from '@/components/AppPost'
 
 export default {
-  name: 'home',
+  name: 'app-timeline',
   props: ['posts'],
   components: {
     AppPost

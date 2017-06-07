@@ -12,7 +12,6 @@ import EditPost from '@/views/EditPost'
 import Post from '@/views/Post'
 
 import Mentions from '@/views/Mentions'
-import Settings from '@/views/Settings'
 
 import Profile from '@/views/Profile'
 
@@ -62,13 +61,6 @@ export default new Router({
     path: '/mentions',
     name: 'mentions',
     component: Mentions,
-    meta: {
-      auth: true
-    }
-  }, {
-    path: '/settings',
-    name: 'settings',
-    component: Settings,
     meta: {
       auth: true
     }
