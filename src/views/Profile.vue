@@ -1,5 +1,5 @@
 <template>
-  <div class="container my-3" v-if="show">
+  <div class="container my-3">
     <div class="hidden-lg-up float-right" v-if="username === sessionUsername">
       <router-link to="/settings" class="btn btn-secondary btn-sm">
         <span v-html="gear()"></span> <span class="hidden-xs-down">Settings</span>
@@ -8,8 +8,10 @@
         <span v-html="sign_out()"></span> <span class="hidden-xs-down">Sign out</span>
       </a>
     </div>
-    <h1>@{{ username }}</h1>
-    <app-timeline :posts="getPosts(timeline)"></app-timeline>
+    <div v-if="show">
+      <h1>@{{ username }}</h1>
+      <app-timeline :posts="getPosts(timeline)"></app-timeline>
+    </div>
   </div>
 </template>
 
