@@ -23,7 +23,8 @@ export default {
     return {
       post: {
         id: null,
-        text: ''
+        text: '',
+        in_reply_to_post_id: null
       },
       show: true,
       disabled: false,
@@ -33,17 +34,28 @@ export default {
   created () {
     if (this.$store.state.modal.component === 'post-composer-modal' && this.$store.state.modal.payload) {
       this.post = Object.assign({}, this.$store.state.modal.payload)
-    } else if (this.$route.name === 'edit-post') {
+    } else if (this.$route.name === 'edit-post' || this.$route.name === 'reply-post') {
       var id = +this.$route.params.id
       var post = this.getPostById(id)
 
       if (post != null) {
-        this.post = post
+        if (this.$route.name === 'edit-post') {
+          this.post = post
+        } else {
+          this.post.text = '@' + post.user.username + ' '
+          this.post.in_reply_to_post_id = post.id
+        }
       } else {
         this.show = false
         this.$store.dispatch('posts/get', id)
-          .then(response => {
-            this.post = response.data
+          .then(() => {
+            post = this.getPostById(id)
+            if (this.$route.name === 'edit-post') {
+              this.post = post
+            } else {
+              this.post.text = '@' + post.user.username + ' '
+              this.post.in_reply_to_post_id = post.id
+            }
             this.show = true
           })
           .catch(error => this.$store.commit('error/throw', error))

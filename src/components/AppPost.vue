@@ -9,7 +9,9 @@
         <p class="card-text" v-html="post.html" v-routerify></p>
 
         <router-link class="card-link" v-html="comment_discussion()" :to="path" active-class="active"></router-link>
-        <a :href="path" class="card-link" v-html="reply()" @click.prevent="composeReply"></a>
+
+        <router-link class="card-link hidden-md-up" v-html="reply()" :to="path + '/reply'"></router-link>
+        <a :href="path" class="card-link hidden-sm-down" v-html="reply()" @click.prevent="composeReply"></a>
 
         <router-link class="card-link hidden-md-up" v-html="pencil()" :to="path + '/edit'" v-if="editable"></router-link>
         <a :href="path + '/edit'" class="card-link hidden-sm-down" v-html="pencil()" v-if="editable" @click.prevent="edit"></a>

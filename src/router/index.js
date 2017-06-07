@@ -9,6 +9,7 @@ import Signup from '@/views/Signup'
 
 import NewPost from '@/views/NewPost'
 import EditPost from '@/views/EditPost'
+import ReplyPost from '@/views/ReplyPost'
 import Post from '@/views/Post'
 
 import Mentions from '@/views/Mentions'
@@ -48,6 +49,14 @@ export default new Router({
     path: '/posts/:id/edit',
     name: 'edit-post',
     component: EditPost,
+    meta: {
+      auth: true
+    },
+    props: true
+  }, {
+    path: '/posts/:id/reply',
+    name: 'reply-post',
+    component: ReplyPost,
     meta: {
       auth: true
     },
