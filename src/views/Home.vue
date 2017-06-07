@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <app-timeline :posts="posts"></app-timeline>
+    <app-timeline :posts="getPosts(timeline)"></app-timeline>
   </div>
 </template>
 
@@ -13,13 +13,18 @@ export default {
   components: {
     AppTimeline
   },
+  data () {
+    return {
+      timeline: '/posts/'
+    }
+  },
   created () {
-    this.$store.dispatch('posts/get')
+    this.$store.dispatch('timelines/get', this.timeline)
       .catch(error => this.$store.commit('error/throw', error))
   },
   computed: {
     ...mapGetters({
-      posts: 'posts/posts'
+      getPosts: 'timelines/getPosts'
     })
   }
 }

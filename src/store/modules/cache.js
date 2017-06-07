@@ -66,10 +66,14 @@ export default {
 
       Object.keys(models).forEach(model => {
         mutations[model] = (state, entry) => {
-          if (state[pluralify(model)][entry.id]) {
-            entry = Object.assign(state[pluralify(model)][entry.id], entry)
+          if (typeof entry !== 'number') {
+            if (state[pluralify(model)][entry.id]) {
+              entry = Object.assign(state[pluralify(model)][entry.id], entry)
+            }
+            Vue.set(state[pluralify(model)], entry.id, entry)
+          } else {
+            Vue.set(state[pluralify(model)], entry, null)
           }
-          Vue.set(state[pluralify(model)], entry.id, entry)
         }
       })
 
@@ -82,24 +86,26 @@ export default {
 
       Object.keys(models).forEach(model => {
         actions[model] = ({ commit, dispatch }, data) => {
-          var include = models[model]
+          if (typeof data !== 'number') {
+            var include = models[model]
 
-          if (include != null) {
-            Object.keys(include).forEach(key => {
-              var association = include[key]
+            if (include != null) {
+              Object.keys(include).forEach(key => {
+                var association = include[key]
 
-              if (data[key] != null) {
-                dispatch((isPlural(key) ? pluralify(association) : association), data[key])
+                if (data[key] != null) {
+                  dispatch((isPlural(key) ? pluralify(association) : association), data[key])
 
-                if (isPlural(key)) {
-                  data[key] = data[key].map(entry => {
-                    return { id: entry.id }
-                  })
-                } else {
-                  data[key] = { id: data[key].id }
+                  if (isPlural(key)) {
+                    data[key] = data[key].map(entry => {
+                      return { id: entry.id }
+                    })
+                  } else {
+                    data[key] = { id: data[key].id }
+                  }
                 }
-              }
-            })
+              })
+            }
           }
 
           commit(model, data)

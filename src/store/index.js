@@ -8,6 +8,7 @@ import error from './modules/error'
 import modal from './modules/modal'
 import cache from './modules/cache'
 import posts from './modules/posts'
+import timelines from './modules/timelines'
 
 Vue.use(Vuex)
 
@@ -20,7 +21,8 @@ export default new Vuex.Store({
     error,
     modal,
     cache,
-    posts
+    posts,
+    timelines
   },
   strict: true
 })

@@ -8,31 +8,36 @@
         <span v-html="sign_out()"></span> <span class="hidden-xs-down">Sign out</span>
       </a>
     </div>
-    <h1>Profile</h1>
+    <h1>@{{ username }}</h1>
+    <app-timeline :posts="getPosts(timeline)"></app-timeline>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import AppTimeline from '@/components/AppTimeline'
 
 export default {
   name: 'profile',
   props: ['username'],
-  data () {
-    return {
-    }
-  },
   components: {
+    AppTimeline
   },
   created () {
+    this.$store.dispatch('timelines/get', this.timeline)
+      .catch(error => this.$store.commit('error/throw', error))
   },
   computed: {
     ...mapGetters({
       gear: 'octicons/gear',
       sign_out: 'octicons/sign-out',
       authenticated: 'session/authenticated',
-      sessionUsername: 'session/username'
-    })
+      sessionUsername: 'session/username',
+      getPosts: 'timelines/getPosts'
+    }),
+    timeline () {
+      return '/users/' + this.username + '/posts/'
+    }
   },
   methods: {
     signout () {
@@ -44,4 +49,7 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  max-width: 590px;
+}
 </style>
