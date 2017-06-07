@@ -1,5 +1,5 @@
 <template>
-  <div class="container my-3">
+  <div class="container my-3" v-if="show">
     <div class="hidden-lg-up float-right" v-if="username === sessionUsername">
       <router-link to="/settings" class="btn btn-secondary btn-sm">
         <span v-html="gear()"></span> <span class="hidden-xs-down">Settings</span>
@@ -23,8 +23,14 @@ export default {
   components: {
     AppTimeline
   },
+  data () {
+    return {
+      show: false
+    }
+  },
   created () {
     this.$store.dispatch('timelines/get', this.timeline)
+      .then(() => { this.show = true })
       .catch(error => this.$store.commit('error/throw', error))
   },
   computed: {
