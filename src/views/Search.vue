@@ -4,7 +4,7 @@
       <input class="form-control" type="text" placeholder="Search" v-model="query">
     </form>
 
-    <div class="card my-3" v-if="timeline == null && query !== ''">
+    <div class="card my-3" v-if="timeline == null && (query != null && query !== '')">
       <div class=card-block>
         <p class="lead">Only search via <router-link to="/search?q=%23hashtag">#hashtag</router-link> is supported at this moment. <br><br> Full text search will come at a later time.</p>
       </div>
