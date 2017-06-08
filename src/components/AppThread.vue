@@ -2,12 +2,13 @@
   <div>
     <app-post :post="post" v-if="post"></app-post>
 
-    <div class="ml-3 ml-md-5">
+    <div :class="{ 'ml-3 ml-md-5': level < 5 }">
       <transition-group class="posts" name="slide-fade" tag="div">
         <app-thread class="post"
           v-for="(post, index) in getPosts(timeline)"
           :key="post.id"
-          :post="post"></app-thread>
+          :post="post"
+          :level="level + 1"></app-thread>
       </transition-group>
     </div>
   </div>
@@ -19,14 +20,14 @@ import AppPost from '@/components/AppPost'
 
 export default {
   name: 'AppThread',
-  props: ['post'],
+  props: {
+    post: {},
+    level: {
+      default: 0
+    }
+  },
   components: {
     AppPost
-  },
-  data () {
-    return {
-      show: true
-    }
   },
   created () {
     this.fetch(this.post.id)
