@@ -93,10 +93,17 @@ export default {
           if (this.$store.state.modal.component === 'post-composer-modal') {
             this.$store.commit('modal/hide')
           }
-          if (response.data.in_reply_to_post_id) {
-            this.$router.push('/posts/' + response.data.in_reply_to_post_id)
-          } else {
-            this.$router.push('/posts/' + response.data.id)
+          if (this.post.id == null) {
+            if (response.data.in_reply_to_post_id) {
+              if (this.$route.name === 'post') {
+                this.$store.dispatch('timelines/get', '/posts/' + response.data.in_reply_to_post_id + '/replies/')
+                  .catch(() => {})
+              } else {
+                this.$router.push('/posts/' + response.data.in_reply_to_post_id)
+              }
+            } else {
+              this.$router.push('/posts/' + response.data.id)
+            }
           }
         })
         .catch(error => {

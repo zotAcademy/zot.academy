@@ -1,59 +1,37 @@
 <template>
   <div class="container">
-    <app-post
-      v-if="post"
-      :post="post"
-      @remove="$router.push('/')"></app-post>
-
-    <div class="ml-5" v-if="show || getPosts(timeline).length > 0">
-      <app-timeline :posts="getPosts(timeline)"></app-timeline>
-    </div>
+    <app-thread :post="post" v-if="post"></app-thread>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import AppPost from '@/components/AppPost'
-import AppTimeline from '@/components/AppTimeline'
+import AppThread from '@/components/AppThread'
 
 export default {
   name: 'post',
   props: ['id'],
   components: {
-    AppPost,
-    AppTimeline
-  },
-  data () {
-    return {
-      show: false
-    }
+    AppThread
   },
   created () {
     this.fetch(this.id)
   },
   beforeRouteUpdate (to, from, next) {
-    this.show = false
     next()
     this.fetch(to.params.id)
   },
   computed: {
     ...mapGetters({
-      getPostById: 'posts/getPostById',
-      getPosts: 'timelines/getPosts'
+      getPostById: 'posts/getPostById'
     }),
     post () {
       return this.getPostById(this.id)
-    },
-    timeline () {
-      return '/posts/' + this.id + '/replies/'
     }
   },
   methods: {
     fetch (id) {
       this.$store.dispatch('posts/get', id)
-        .catch(error => this.$store.commit('error/throw', error))
-      this.$store.dispatch('timelines/get', '/posts/' + id + '/replies/')
-        .then(() => { this.show = true })
         .catch(error => this.$store.commit('error/throw', error))
     }
   }

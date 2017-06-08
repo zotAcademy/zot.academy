@@ -79,7 +79,11 @@ export default {
     },
     remove () {
       this.$store.dispatch('posts/delete', this.post)
-        .then(response => { this.$emit('remove') })
+        .then(response => {
+          if (this.$route.name === 'post' && this.post.id === this.$route.params.id) {
+            this.$router.push('/')
+          }
+        })
         .catch(error => { this.error = error.response.data })
     }
   }
