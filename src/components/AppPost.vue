@@ -80,7 +80,7 @@ export default {
     remove () {
       this.$store.dispatch('posts/delete', this.post)
         .then(response => {
-          if (this.$route.name === 'post' && this.post.id === this.$route.params.id) {
+          if (this.$route.name === 'post' && this.post.id === +this.$route.params.id) {
             this.$router.push('/')
           }
         })
